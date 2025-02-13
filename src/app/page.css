@@ -1,0 +1,39 @@
+.page {
+  display: flex;
+  flex-direction: row;
+  background: linear-gradient(to bottom, #024284, #2481b6, #52d6fb);
+  height: 100%;
+  border-radius: 100px;
+}
+
+.left-area {
+  align-items: center;
+  gap: 30px;
+  padding: 5% 150px 0px 150px;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+}
+
+.right-area {
+  padding: 5% 0px 0px 0px;
+  text-align: center;
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+}
+
+.button-enter {
+  padding: 3% 15% 3% 15%;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.1s ease;
+
+  p {
+    color: #024284;
+    font-size: 25px;
+    font-weight: 300;
+  }
+}
