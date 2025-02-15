@@ -19,7 +19,13 @@ export default function About() {
           ESSE PROBLEMA E TROUXE O AMO COMO SULAÇÃO PRÁTICA E INOVADORA PARA O
           SISTEMA ACADÊMICO.
         </p>
-        <p style={{ color: "#024284", textDecoration: "underline" }}>
+        <p
+          style={{
+            color: "#024284",
+            textDecoration: "underline",
+            cursor: "pointer",
+          }}
+        >
           PRECISO DE AJUDA
         </p>
       </section>
