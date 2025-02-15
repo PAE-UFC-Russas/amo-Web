@@ -9,14 +9,14 @@
 .left-area {
   align-items: center;
   gap: 30px;
-  padding: 5% 150px 0px 150px;
+  padding: 6% 150px 0px 150px;
   width: 60%;
   display: flex;
   flex-direction: column;
 }
 
 .right-area {
-  padding: 5% 0px 0px 0px;
+  padding: 8% 0px 0px 0px;
   text-align: center;
   width: 40%;
   display: flex;
@@ -24,16 +24,75 @@
 }
 
 .button-enter {
-  padding: 3% 15% 3% 15%;
+  padding: 12px 50px;
   border-radius: 10px;
   border: none;
   cursor: pointer;
-  box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.2);
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
   transition: box-shadow 0.1s ease;
 
   p {
     color: #024284;
     font-size: 25px;
     font-weight: 300;
+  }
+}
+.button-enter:hover {
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+  transform: scale(1.01);
+}
+
+@media (max-width: 1024px) {
+  .page {
+    background-color: red;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 30px;
+  }
+
+  .left-area {
+    width: 100%;
+    padding: 5% 10%;
+  }
+
+  .right-area {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .page {
+    background-color: red;
+    border-radius: 20px;
+    padding: 10px;
+  }
+  .right-area {
+    display: none;
+  }
+
+  .left-area {
+    padding: 5% 5%;
+  }
+
+  .button-enter {
+    width: 50%;
+    padding: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page {
+    background-color: yellow;
+    padding: 5px;
+    border-radius: 10px;
+  }
+
+  .right-area {
+    display: none;
+  }
+
+  .button-enter {
+    width: 50%;
+    font-size: 18px;
   }
 }
