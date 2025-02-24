@@ -5,6 +5,7 @@ import VerticalLine from "@/components/verticalLine";
 import About from "@/components/about";
 import Title from "@/components/title";
 import SubTitle from "@/components/subTitle";
+import DefaultButton from "@/components/DefaultButton";
 
 export default function Home() {
   return (
@@ -16,9 +17,7 @@ export default function Home() {
 
         <SubTitle subtitle="ESQUECI MINHA SENHA" />
 
-        <button className="button-enter">
-          <p>Entrar</p>
-        </button>
+        <DefaultButton children="Entrar" />
 
         <SubTitle subtitle="NÃO POSSUO CADASTRO" />
       </div>

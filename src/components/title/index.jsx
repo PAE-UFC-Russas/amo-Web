@@ -1,3 +1,5 @@
+import "./styles.css";
+
 export default function Title({ title }) {
-  return <h1 style={{ color: "white", fontSize: "3rem" }}>{title}</h1>;
+  return <h1 className="title">{title}</h1>;
 }
