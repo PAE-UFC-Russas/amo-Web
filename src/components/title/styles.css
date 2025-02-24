@@ -1,0 +1,17 @@
+.title {
+  font-size: 3rem;
+  text-align: center;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 2rem;
+  }
+}

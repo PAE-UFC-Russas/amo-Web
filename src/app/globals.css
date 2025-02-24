@@ -11,3 +11,15 @@ body {
   height: 100vh;
   padding: 50px 100px 50px 100px;
 }
+
+@media (max-width: 768px) {
+  body {
+    padding: 30px 20px 30px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 30px 20px 30px 20px;
+  }
+}

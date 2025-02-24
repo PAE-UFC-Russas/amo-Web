@@ -23,28 +23,9 @@
   flex-direction: column;
 }
 
-.button-enter {
-  padding: 12px 50px;
-  border-radius: 10px;
-  border: none;
-  cursor: pointer;
-  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
-  transition: box-shadow 0.1s ease;
-
-  p {
-    color: #024284;
-    font-size: 25px;
-    font-weight: 300;
-  }
-}
-.button-enter:hover {
-  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
-  transform: scale(1.01);
-}
-
 @media (max-width: 1024px) {
   .page {
-    background-color: red;
+    background-color: blue;
     flex-direction: column;
     align-items: center;
     border-radius: 30px;
@@ -73,11 +54,6 @@
   .left-area {
     padding: 5% 5%;
   }
-
-  .button-enter {
-    width: 50%;
-    padding: 12px;
-  }
 }
 
 @media (max-width: 480px) {
@@ -89,10 +65,5 @@
 
   .right-area {
     display: none;
-  }
-
-  .button-enter {
-    width: 50%;
-    font-size: 18px;
   }
 }
