@@ -5,7 +5,7 @@ import VerticalLine from "@/components/verticalLine";
 import About from "@/components/about";
 import Title from "@/components/title";
 import SubTitle from "@/components/subTitle";
-import DefaultButton from "@/components/DefaultButton";
+import DefaultButton from "@/components/defaultButton";
 
 export default function Home() {
   return (

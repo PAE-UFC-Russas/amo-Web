@@ -11,22 +11,24 @@ export default function cadastro() {
   return (
     <div className="page">
       <div className="right-area">
-        <About />
+        <Title title="CADASTRE-SE" />
+        <Input placeholder="EMAIL" />
+        <Input placeholder="SENHA" />
+        <Input placeholder="CONFIRMA SENHA" />
+        <Input placeholder="SELECIONAR PERFIL" />
       </div>
 
       <VerticalLine />
 
       <div className="left-area">
-        <Title title="CADASTRE-SE" />
+        <Title title="QUASE LA" />
+        <Input placeholder="NOME DE USUARIO" />
+        <Input placeholder="NOME COMPLETO" />
+        <Input placeholder="MATRICULA" />
+        <Input placeholder="SELECIONAR CURSO" />
+        <Input placeholder="ANO DE ENTRADA" />
 
-        <Input placeholder="EMAIL" />
-        <Input placeholder="SENHA" />
-        <Input placeholder="CONFIRMA SENHA" />
-        <Input placeholder="SELECIONAR PERFIL" />
-
-        <SubTitle subtitle="CADASTRE-SE COMO PROFESSOR" />
-
-        <DefaultButton children="Entrar" />
+        <DefaultButton children="Prosseguir" />
       </div>
     </div>
   );
