@@ -9,15 +9,16 @@
   align-items: center;
   gap: 20px;
   padding: 6% 150px 0px 150px;
-  width: 60%;
+  width: 50%;
   display: flex;
   flex-direction: column;
 }
 
 .right-area {
-  padding: 6% 0px 0px 0px;
+  padding: 6% 100px 0px 100px;
+  gap: 20px;
   text-align: center;
-  width: 40%;
+  width: 50%;
   display: flex;
   flex-direction: column;
 }
