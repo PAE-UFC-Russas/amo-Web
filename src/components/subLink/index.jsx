@@ -1,4 +1,4 @@
-export default function SubTitle({ subtitle }) {
+export default function SubLink({ subtitle }) {
   return (
     <p
       style={{

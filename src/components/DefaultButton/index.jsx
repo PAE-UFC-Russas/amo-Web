@@ -1,6 +1,6 @@
 import "./styles.css";
 
-export default function defaultButton({ children }) {
+export default function DefaultButton({ children }) {
   return (
     <button className="button-enter">
       <p>{children}</p>

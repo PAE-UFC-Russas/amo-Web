@@ -4,8 +4,8 @@ import Input from "@/components/input";
 import VerticalLine from "@/components/verticalLine";
 import About from "@/components/about";
 import Title from "@/components/title";
-import SubTitle from "@/components/subTitle";
-import DefaultButton from "@/components/defaultButton";
+import SubLink from "@/components/subLink";
+import DefaultButton from "@/components/DefaultButton";
 
 export default function cadastro() {
   return (
@@ -24,7 +24,7 @@ export default function cadastro() {
         <Input placeholder="CONFIRMA SENHA" />
         <Input placeholder="SELECIONAR PERFIL" />
 
-        <SubTitle subtitle="CADASTRE-SE COMO PROFESSOR" />
+        <SubLink subtitle="CADASTRE-SE COMO PROFESSOR" />
 
         <DefaultButton children="Entrar" />
       </div>

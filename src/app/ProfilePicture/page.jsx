@@ -4,8 +4,8 @@ import Image from "next/image";
 import Input from "@/components/input";
 import VerticalLine from "@/components/verticalLine";
 import Title from "@/components/title";
-import SubTitle from "@/components/subTitle";
-import DefaultButton from "@/components/defaultButton";
+import SubLink from "@/components/subLink";
+import DefaultButton from "@/components/DefaultButton";
 import Foto from "../../../assets/perfil.png";
 
 export default function cadastro() {
@@ -31,7 +31,7 @@ export default function cadastro() {
           crossOrigin="anonymous"
         />
 
-        <SubTitle subtitle="Pula etapa" />
+        <SubLink subtitle="Pula etapa" />
 
         <DefaultButton children="Prosseguir" />
       </div>

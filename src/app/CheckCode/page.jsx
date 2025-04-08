@@ -1,8 +1,8 @@
 import "./page.css";
 
 import Title from "@/components/title";
-import SubTitle from "@/components/subTitle";
-import DefaultButton from "@/components/defaultButton";
+import SubLink from "@/components/subLink";
+import DefaultButton from "@/components/DefaultButton";
 
 export default function cadastro() {
   return (
@@ -18,7 +18,7 @@ export default function cadastro() {
         <input type="number" className="code-input" />
       </div>
 
-      <SubTitle subtitle="Reenviar codigo" />
+      <SubLink subtitle="Reenviar codigo" />
 
       <DefaultButton children="Prosseguir" />
     </div>

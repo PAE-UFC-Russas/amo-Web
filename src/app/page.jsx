@@ -4,8 +4,8 @@ import Input from "@/components/input";
 import VerticalLine from "@/components/verticalLine";
 import About from "@/components/about";
 import Title from "@/components/title";
-import SubTitle from "@/components/subTitle";
-import DefaultButton from "@/components/defaultButton";
+import SubTitle from "@/components/subLink";
+import DefaultButton from "@/components/DefaultButton";
 
 export default function Home() {
   return (
