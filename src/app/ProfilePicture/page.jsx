@@ -8,7 +8,7 @@ import SubLink from "@/components/subLink";
 import DefaultButton from "@/components/DefaultButton";
 import Foto from "../../../assets/perfil.png";
 
-export default function cadastro() {
+export default function ProfilePicture() {
   return (
     <div className="page">
       <div className="right-area">
@@ -31,7 +31,7 @@ export default function cadastro() {
           crossOrigin="anonymous"
         />
 
-        <SubLink subtitle="Pula etapa" />
+        <SubLink subtitle="PULAR ETAPA" />
 
         <DefaultButton children="Prosseguir" />
       </div>

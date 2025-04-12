@@ -1,0 +1,33 @@
+.page {
+  display: flex;
+  background: linear-gradient(to bottom, #024284, #2481b6, #52d6fb);
+  height: 100%;
+  border-radius: 100px;
+  flex-direction: column;
+}
+
+.buttons-area {
+  margin-top: 6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+@media (max-width: 1024px) {
+  .page {
+    background-color: red;
+  }
+}
+
+@media (max-width: 768px) {
+  .page {
+    background-color: pink;
+  }
+}
+
+@media (max-width: 480px) {
+  .page {
+    background-color: blue;
+  }
+}

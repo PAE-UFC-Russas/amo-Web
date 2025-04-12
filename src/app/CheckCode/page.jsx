@@ -4,7 +4,7 @@ import Title from "@/components/title";
 import SubLink from "@/components/subLink";
 import DefaultButton from "@/components/DefaultButton";
 
-export default function cadastro() {
+export default function CheckCode() {
   return (
     <div className="page">
       <Title title="UM CODIGO FOI ENVIADO PARA SEU EMAIL" />

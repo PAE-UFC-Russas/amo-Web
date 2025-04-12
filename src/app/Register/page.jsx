@@ -7,7 +7,7 @@ import Title from "@/components/title";
 import SubLink from "@/components/subLink";
 import DefaultButton from "@/components/DefaultButton";
 
-export default function cadastro() {
+export default function Register() {
   return (
     <div className="page">
       <div className="right-area">

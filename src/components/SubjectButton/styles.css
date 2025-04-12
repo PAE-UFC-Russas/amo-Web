@@ -1,0 +1,30 @@
+.subject-button {
+  max-width: 1024px;
+  min-width: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 1rem;
+  border-radius: 0.8rem;
+  background-color: #00495e;
+  color: white;
+  font-size: 1.3rem;
+  text-decoration: none;
+  cursor: pointer;
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+
+  transition: all 0.3s ease;
+}
+
+.subject-button:hover {
+  width: 620px;
+  padding: 1.6rem 1.2rem;
+}
+
+.subject-button-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
