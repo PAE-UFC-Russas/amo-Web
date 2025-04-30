@@ -5,14 +5,20 @@
   white-space: "pre-line";
 }
 
+@media (max-width: 1024px) {
+  .title {
+    font-size: 1.6rem;
+  }
+}
+
 @media (max-width: 768px) {
   .title {
-    font-size: 2rem;
+    font-size: 1.4rem;
   }
 }
 
 @media (max-width: 480px) {
   .title {
-    font-size: 2rem;
+    font-size: 1.2rem;
   }
 }

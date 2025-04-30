@@ -10,30 +10,32 @@ import Foto from "../../../assets/perfil.png";
 
 export default function ProfilePicture() {
   return (
-    <div className="page">
-      <div className="right-area">
-        <Title title="ESTAMOS QUASE LA" />
-        <Input placeholder="NOME DE USUARIO" />
-        <Input placeholder="NOME COMPLETO" />
-        <Input placeholder="MATRICULA" />
-        <Input placeholder="SELECIONAR O CURSO" />
-        <Input placeholder="ANO DE ENTRADA" />
-      </div>
+    <div className="container-border">
+      <div className="page">
+        <div className="right-area">
+          <Title title="ESTAMOS QUASE LA" />
+          <Input placeholder="NOME DE USUARIO" />
+          <Input placeholder="NOME COMPLETO" />
+          <Input placeholder="MATRICULA" />
+          <Input placeholder="SELECIONAR O CURSO" />
+          <Input placeholder="ANO DE ENTRADA" />
+        </div>
 
-      <VerticalLine />
+        <VerticalLine />
 
-      <div className="left-area">
-        <Title title="SELECIONE SUA FOTO DE PERFIL" />
-        <Image
-          style={{ height: 200, width: 200 }}
-          src={Foto}
-          alt="Logo"
-          crossOrigin="anonymous"
-        />
+        <div className="left-area">
+          <Title title="SELECIONE SUA FOTO DE PERFIL" />
+          <Image
+            style={{ height: 200, width: 200 }}
+            src={Foto}
+            alt="Logo"
+            crossOrigin="anonymous"
+          />
 
-        <SubLink subtitle="PULAR ETAPA" />
+          <SubLink subtitle="PULAR ETAPA" />
 
-        <DefaultButton children="Prosseguir" />
+          <DefaultButton children="Prosseguir" />
+        </div>
       </div>
     </div>
   );

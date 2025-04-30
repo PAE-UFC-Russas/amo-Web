@@ -9,24 +9,26 @@ import DefaultButton from "@/components/DefaultButton";
 
 export default function Register() {
   return (
-    <div className="page">
-      <div className="right-area">
-        <About />
-      </div>
+    <div className="container-border">
+      <div className="page">
+        <div className="right-area">
+          <About />
+        </div>
 
-      <VerticalLine />
+        <VerticalLine />
 
-      <div className="left-area">
-        <Title title="CADASTRE-SE" />
+        <div className="left-area">
+          <Title title="CADASTRE-SE" />
 
-        <Input placeholder="EMAIL" />
-        <Input placeholder="SENHA" />
-        <Input placeholder="CONFIRMA SENHA" />
-        <Input placeholder="SELECIONAR PERFIL" />
+          <Input placeholder="EMAIL" />
+          <Input placeholder="SENHA" />
+          <Input placeholder="CONFIRMA SENHA" />
+          <Input placeholder="SELECIONAR PERFIL" />
 
-        <SubLink subtitle="CADASTRE-SE COMO PROFESSOR" />
+          <SubLink subtitle="CADASTRE-SE COMO PROFESSOR" />
 
-        <DefaultButton children="Entrar" />
+          <DefaultButton children="Entrar" />
+        </div>
       </div>
     </div>
   );

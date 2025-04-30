@@ -6,6 +6,9 @@
   border-radius: 100px;
   justify-content: space-around;
   align-items: center;
+
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+  transition: box-shadow 0.1s ease;
 }
 
 .container-code {

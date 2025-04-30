@@ -9,23 +9,25 @@ import DefaultButton from "@/components/DefaultButton";
 
 export default function Home() {
   return (
-    <div className="page">
-      <div className="left-area">
-        <Title title="LOGIN" />
-        <Input placeholder="EMAIL" />
-        <Input placeholder="SENHA" />
+    <div className="container-border">
+      <div className="page">
+        <div className="left-area">
+          <Title title="LOGIN" />
+          <Input placeholder="EMAIL" />
+          <Input placeholder="SENHA" />
 
-        <SubTitle subtitle="ESQUECI MINHA SENHA" />
+          <SubTitle subtitle="ESQUECI MINHA SENHA" />
 
-        <DefaultButton children="Entrar" />
+          <DefaultButton children="Entrar" />
 
-        <SubTitle subtitle="NÃO POSSUO CADASTRO" />
-      </div>
+          <SubTitle subtitle="NÃO POSSUO CADASTRO" />
+        </div>
 
-      <VerticalLine />
+        <VerticalLine />
 
-      <div className="right-area">
-        <About />
+        <div className="right-area">
+          <About />
+        </div>
       </div>
     </div>
   );

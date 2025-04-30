@@ -6,21 +6,23 @@ import DefaultButton from "@/components/DefaultButton";
 
 export default function CheckCode() {
   return (
-    <div className="page">
-      <Title title="UM CODIGO FOI ENVIADO PARA SEU EMAIL" />
+    <div className="container-border">
+      <div className="page">
+        <Title title="UM CODIGO FOI ENVIADO PARA SEU EMAIL" />
 
-      <div className="container-code">
-        <input type="number" className="code-input" />
-        <input type="number" className="code-input" />
-        <input type="number" className="code-input" />
-        <input type="number" className="code-input" />
-        <input type="number" className="code-input" />
-        <input type="number" className="code-input" />
+        <div className="container-code">
+          <input type="number" className="code-input" />
+          <input type="number" className="code-input" />
+          <input type="number" className="code-input" />
+          <input type="number" className="code-input" />
+          <input type="number" className="code-input" />
+          <input type="number" className="code-input" />
+        </div>
+
+        <SubLink subtitle="Reenviar codigo" />
+
+        <DefaultButton children="Prosseguir" />
       </div>
-
-      <SubLink subtitle="Reenviar codigo" />
-
-      <DefaultButton children="Prosseguir" />
     </div>
   );
 }

@@ -1,10 +1,9 @@
 .subject-button {
-  max-width: 1024px;
-  min-width: 600px;
+  min-width: 500px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1.5rem 1rem;
+  padding: 1rem 1rem;
   border-radius: 0.8rem;
   background-color: #00495e;
   color: white;
@@ -18,8 +17,8 @@
 }
 
 .subject-button:hover {
-  width: 620px;
-  padding: 1.6rem 1.2rem;
+  width: 510px;
+  padding: 1.1rem 1.2rem;
 }
 
 .subject-button-content {
@@ -27,4 +26,43 @@
   align-items: center;
   justify-content: center;
   font-weight: bold;
+}
+
+@media (max-width: 1024px) {
+  .subject-button {
+    min-width: 400px;
+    padding: 0.9rem 0.9rem;
+    font-size: 1.2rem;
+  }
+
+  .subject-button:hover {
+    min-width: 410px;
+    padding: 1rem 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .subject-button {
+    min-width: 300px;
+    padding: 0.8rem 0.8rem;
+    font-size: 1.1rem;
+  }
+
+  .subject-button:hover {
+    min-width: 310px;
+    padding: 0.9rem 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .subject-button {
+    min-width: 100%; /* Ocupa toda a largura disponível */
+    padding: 0.7rem 0.7rem;
+    font-size: 1rem;
+  }
+
+  .subject-button:hover {
+    min-width: 100%; /* Mantém largura total */
+    padding: 0.8rem 0.8rem;
+  }
 }

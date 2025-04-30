@@ -13,7 +13,7 @@
 .card-img {
   position: absolute; /* filho sobreposto */
   top: -25px; /* ajusta a posição vertical */
-  right: 220px; /* ajusta a posição horizontal */
+  right: 310px; /* ajusta a posição horizontal */
   width: 80px;
   height: 80px;
   background-color: blue;

@@ -8,33 +8,35 @@ import DefaultButton from "@/components/DefaultButton";
 
 export default function TeacherRegistration() {
   return (
-    <div className="page">
-      <div className="right-area">
-        <About />
-      </div>
+    <div className="container-border">
+      <div className="page">
+        <div className="right-area">
+          <About />
+        </div>
 
-      <VerticalLine />
+        <VerticalLine />
 
-      <div className="left-area">
-        <Title title="CADASTRE PROFESSOR" />
+        <div className="left-area">
+          <Title title="CADASTRE PROFESSOR" />
 
-        <p
-          style={{
-            color: "white",
-            textAlign: "justify",
-            fontSize: "90%",
-            marginTop: "70px",
-          }}
-        >
-          Olá Docente, bem vindo(a) ao AMO! Para dar continuidade ao cadastro,
-          envie um email para o endereço paeufcrussas@gmail.com com as seguintes
-          informações:
-        </p>
+          <p
+            style={{
+              color: "white",
+              textAlign: "justify",
+              fontSize: "90%",
+              marginTop: "70px",
+            }}
+          >
+            Olá Docente, bem vindo(a) ao AMO! Para dar continuidade ao cadastro,
+            envie um email para o endereço paeufcrussas@gmail.com com as
+            seguintes informações:
+          </p>
 
-        <Input placeholder="NOME" />
-        <Input placeholder="SIAPE" />
+          <Input placeholder="NOME" />
+          <Input placeholder="SIAPE" />
 
-        <DefaultButton children="Enviar email" />
+          <DefaultButton children="Enviar email" />
+        </div>
       </div>
     </div>
   );
