@@ -1,22 +1,43 @@
 import React from "react";
+import Image from "next/image"; // Adicionado para a imagem de perfil
 import "./styles.css";
 
-import { FaRegHandPointRight } from "react-icons/fa";
-import { FaRegMessage } from "react-icons/fa6";
+import { FaRegThumbsUp, FaRegCommentDots } from "react-icons/fa"; // Ícones atualizados
 
 import HorizontaLine from "../HorizontalLine";
 
-export default function Card({ author, title, description, date, comments }) {
+export default function Card({
+  author,
+  title,
+  description,
+  date,
+  comments,
+  likes,
+  isResponded,
+  avatar,
+}) {
   return (
-    <div className="card">
-      <div className="card-img"></div>
+    <div className={`card ${isResponded ? "responded" : ""}`}>
       <div className="card-header">
-        <div className="author">{author}</div>
+        {avatar ? (
+          <Image
+            src={avatar}
+            alt={author}
+            width={50}
+            height={50}
+            className="avatar-image"
+          />
+        ) : (
+          <div className="avatar-placeholder"></div>
+        )}
+        <div className="author-details">
+          <div className="author">{author}</div>
+          {isResponded && <span className="responded-badge">RESPONDIDA</span>}
+        </div>
       </div>
       <div className="card-body">
-        <h3>{title || "Sem título"}</h3>
+        {title && <h3>{title}</h3>}
         <HorizontaLine height="2px" color="#52D6FB" />
-        <div class="linha"></div>
         <p>{description}</p>
       </div>
 
@@ -24,12 +45,14 @@ export default function Card({ author, title, description, date, comments }) {
         <span>{date}</span>
         <div className="interactions">
           <span style={{ display: "flex", alignItems: "center", gap: "5px" }}>
-            {comments}
-            <FaRegMessage size={17} cursor={"pointer"} />
+            {likes}
+            <FaRegThumbsUp size={17} cursor={"pointer"} />{" "}
+            {/* Ícone de curtida */}
           </span>
           <span style={{ display: "flex", alignItems: "center", gap: "5px" }}>
             {comments}
-            <FaRegHandPointRight size={20} cursor={"pointer"} />
+            <FaRegCommentDots size={17} cursor={"pointer"} />{" "}
+            {/* Ícone de comentários */}
           </span>
         </div>
       </div>

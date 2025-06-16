@@ -2,27 +2,26 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  position: relative; /* para o posicionamento absoluto do filho */
   background-color: white;
   border-radius: 10px;
-  padding: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-  height: 200px;
+  padding: 15px; /* Aumenta o padding */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra mais suave */
+  min-height: 220px; /* Altura mínima para consistência */
+  transition: transform 0.2s ease-in-out; /* Efeito de hover */
 }
 
-.card-img {
-  position: absolute; /* filho sobreposto */
-  top: -25px; /* ajusta a posição vertical */
-  right: 310px; /* ajusta a posição horizontal */
-  width: 80px;
-  height: 80px;
-  background-color: blue;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
+.card:hover {
+  transform: translateY(-5px); /* Leve elevação no hover */
+}
+
+.card.responded .responded-badge {
+  background-color: #52d6fb; /* Cor de fundo para o selo */
+  color: #024284; /* Cor do texto para o selo */
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-size: 10px;
   font-weight: bold;
+  margin-left: 10px;
 }
 
 .card-header {
@@ -31,39 +30,81 @@
   margin-bottom: 10px;
 }
 
+.avatar-image {
+  border-radius: 50%;
+  margin-right: 10px;
+  object-fit: cover; /* Garante que a imagem cubra o espaço */
+}
+
+.avatar-placeholder {
+  width: 50px;
+  height: 50px;
+  background-color: #e0e0e0; /* Cor do placeholder */
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.author-details {
+  display: flex;
+  align-items: center; /* Alinha o nome e o selo */
+}
+
 .author {
   font-weight: bold;
-  padding-left: 100px;
+  font-size: 1em; /* Tamanho da fonte do autor */
+  color: #333;
 }
 
 .card-body h3 {
-  font-size: 14px;
-  margin-top: 20px;
-  white-space: nowrap;
+  font-size: 1.1em; /* Tamanho da fonte do título */
+  margin-top: 0; /* Remove a margem superior padrão */
+  margin-bottom: 8px; /* Espaço abaixo do título */
+  color: #024284; /* Cor do título */
+  white-space: normal; /* Permite quebra de linha no título */
   overflow: hidden;
   text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Limita a duas linhas */
+  line-clamp: 2; /* Propriedade padrão para compatibilidade */
+  -webkit-box-orient: vertical;
 }
 
 .card-body p {
-  color: #666;
-  font-size: 14px;
-  white-space: nowrap;
+  color: #555; /* Cor do texto da descrição */
+  font-size: 0.9em;
+  line-height: 1.4; /* Espaçamento entre linhas */
+  white-space: normal; /* Permite quebra de linha */
   overflow: hidden;
   text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Limita a três linhas */
+  line-clamp: 3; /* Propriedade padrão para compatibilidade */
+  -webkit-box-orient: vertical;
+  margin-bottom: 10px; /* Espaço abaixo da descrição */
 }
 
 .card-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 10px;
-  font-size: 12px;
-  color: #666;
+  margin-top: auto; /* Empurra o rodapé para baixo */
+  font-size: 0.85em;
+  color: #777;
+  padding-top: 10px; /* Espaço acima do rodapé */
+  border-top: 1px solid #eee; /* Linha sutil acima do rodapé */
 }
 
 .interactions {
   display: flex;
-  gap: 10px;
-  justify-content: center;
+  gap: 15px; /* Aumenta o espaço entre os ícones */
   align-items: center;
+}
+
+.interactions span {
+  color: #024284; /* Cor dos ícones e números */
+  cursor: pointer;
+}
+
+.interactions svg {
+  fill: #024284; /* Cor dos ícones */
 }
