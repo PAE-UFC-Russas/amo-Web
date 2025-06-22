@@ -5,8 +5,7 @@ import Image from "next/image";
 import Sidebar from "@/components/SideBar";
 import Card from "@/components/Card";
 import FloatingButton from "@/components/FloatingButton";
-import DefaultButton from "@/components/DefaultButton";
-import Input from "@/components/input";
+
 import ForumHeader from "@/components/ForumHeader"; // Importa o novo componente
 import { FaUserCircle } from "react-icons/fa"; // Mantido para o ícone de perfil, se necessário como fallback ou passado diretamente
 
@@ -79,24 +78,7 @@ export default function Forum() {
     <div className="Forum-container">
       <Sidebar />
       <div className="Forum-main-content">
-        <ForumHeader>
-          {/* Passando os componentes como children */}
-          <Input placeholder="PESQUISAR DÚVIDAS..." id="forum-search-bar" />
-          <DefaultButton className="Forum-filter-button">
-            Respondidas
-          </DefaultButton>
-          <DefaultButton className="Forum-filter-button">
-            Mais curtidas
-          </DefaultButton>
-          <DefaultButton className="Forum-filter-button">
-            Recentes
-          </DefaultButton>
-          <FaUserCircle
-            size={40}
-            id="forum-profile-icon"
-            className="Forum-profile-icon-passed"
-          />
-        </ForumHeader>
+        <ForumHeader />
         <div className="Forum-posts-grid">
           {forumPosts.map((post, index) => (
             <Card

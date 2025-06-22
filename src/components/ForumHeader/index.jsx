@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { FaSearch, FaUserCircle, FaBars, FaTimes } from "react-icons/fa";
-import Input from "@/components/input";
 import DefaultButton from "@/components/DefaultButton";
 import "./styles.css";
 
@@ -57,7 +56,7 @@ export default function ForumHeader({ children }) {
           // Fallback ou renderização condicional se searchBar não for encontrado
           <div className="ForumHeader-search-bar">
             <FaSearch className="ForumHeader-search-icon" />
-            <Input placeholder="PESQUISAR DÚVIDAS..." />
+            <input placeholder="PESQUISAR DÚVIDAS..." />
           </div>
         )}
       </div>

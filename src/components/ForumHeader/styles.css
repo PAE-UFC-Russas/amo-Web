@@ -3,10 +3,9 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
-  padding: 10px;
+  padding: 15px;
   background-color: white;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .ForumHeader-search-bar-container {
@@ -24,19 +23,15 @@
   width: 100%; /* Ocupa toda a largura do container pai */
 }
 
-.ForumHeader-search-bar .custom-input {
+.ForumHeader-search-bar input {
+  padding: 10px;
   border: none;
-  background-color: transparent;
+  background: transparent;
   margin-left: 10px;
   width: 100%;
   outline: none;
   color: #495057;
 }
-
-.ForumHeader-search-bar .custom-input::placeholder {
-  color: #6c757d;
-}
-
 .ForumHeader-search-icon {
   color: #6c757d;
 }

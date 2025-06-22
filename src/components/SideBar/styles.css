@@ -36,10 +36,11 @@
 }
 
 .menu-item.active {
+  border-radius: 5px 0px 0px 5px;
   background-color: #52d6fb; /* Cor de destaque para o item ativo */
   color: #024284; /* Cor do texto para o item ativo */
-  border-radius: 5px;
   font-size: 1em; /* Tamanho de fonte padrão */
+  margin-left: 20px;
 }
 
 .mobile-menu-toggle {

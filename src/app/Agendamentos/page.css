@@ -1,0 +1,92 @@
+.agendamentos-container {
+  display: flex;
+  background-color: #f0f4f8; /* Fundo azul claro suave */
+  min-height: 100vh;
+}
+
+.agendamentos-main-content {
+  flex-grow: 1;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.agendamentos-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.profile-icon {
+  font-size: 2.5rem; /* Tamanho do ícone de perfil */
+  color: #024284;
+  cursor: pointer;
+}
+
+.agendamentos-title {
+  color: #024284;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.appointments-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+/* Estilos para os botões de filtro */
+.filter-btn {
+  background-color: white;
+  color: #024284;
+  border: 1px solid #b0c4de;
+  padding: 10px 25px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+  background-color: #e6f0ff;
+  border-color: #024284;
+}
+
+.filter-btn.active {
+  background-color: #024284;
+  color: white;
+  border-color: #024284;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .agendamentos-main-content {
+    padding: 20px;
+  }
+
+  .agendamentos-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .filter-buttons {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .filter-btn {
+    padding: 8px 20px;
+  }
+
+  .appointments-list {
+    grid-template-columns: 1fr; /* Uma coluna em telas menores */
+  }
+}

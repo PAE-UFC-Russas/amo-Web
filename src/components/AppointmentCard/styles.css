@@ -1,0 +1,68 @@
+.appointment-card {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  border-left: 8px solid;
+  transition: transform 0.2s ease-in-out;
+}
+
+.appointment-card:hover {
+  transform: translateY(-5px);
+}
+
+.appointment-card.confirmed {
+  border-left-color: #28a745; /* Verde */
+}
+
+.appointment-card.pending {
+  border-left-color: #ffc107; /* Amarelo */
+}
+
+.appointment-card.cancelled {
+  border-left-color: #dc3545; /* Vermelho */
+}
+
+.card-header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.card-status {
+  font-weight: bold;
+  font-size: 0.9em;
+  margin-bottom: 5px;
+}
+
+.card-status.confirmed {
+  color: #28a745;
+}
+
+.card-status.pending {
+  color: #ffc107;
+}
+
+.card-status.cancelled {
+  color: #dc3545;
+}
+
+.card-title {
+  font-weight: bold;
+  font-size: 1.2em;
+  color: #333;
+  margin: 0;
+}
+
+.card-body p {
+  margin: 5px 0;
+  color: #666;
+  font-size: 0.95em;
+}
+
+.card-footer {
+  margin-top: 15px;
+  color: #888;
+  font-size: 0.9em;
+}

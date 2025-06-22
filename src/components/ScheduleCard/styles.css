@@ -1,0 +1,73 @@
+/* Base styles for all schedule cards */
+.schedule-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  border-top: 4px solid #024284; /* Borda azul para destaque */
+}
+
+/* Header com avatar e nome */
+.card-person-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.person-info .name {
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #333;
+  margin: 0;
+}
+
+.person-info .role {
+  font-size: 0.9em;
+  color: #666;
+  margin: 0;
+}
+
+/* Linha divisória */
+.divider {
+  border: 0;
+  height: 1px;
+  background-color: #e0e0e0;
+  margin: 5px 0;
+}
+
+/* Conteúdo específico */
+.card-content .title {
+  font-weight: bold;
+  color: #024284;
+  margin-bottom: 8px;
+  font-size: 1em;
+}
+
+.class-info,
+.monitoring-info {
+  margin-bottom: 15px;
+}
+
+.class-info p,
+.monitoring-info p,
+.location-info p {
+  margin: 4px 0;
+  color: #555;
+  font-size: 0.95em;
+}
+
+.schedule-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}

@@ -1,14 +1,24 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import "./styles.css";
 
 import Logo from "../../../assets/logoSadebar.png";
 
+const menuItems = [
+  { path: "#", label: "ÉTICA PROFISSIONAL" },
+  { path: "/Forum", label: "FÓRUM" },
+  { path: "/Agendamentos", label: "AGENDAMENTO" },
+  { path: "/Schedules", label: "HORÁRIOS" },
+];
+
 export default function SideBar() {
   const [isOpen, setIsOpen] = useState(false); // Controla se o menu mobile está aberto ou fechado
   const [isMobileView, setIsMobileView] = useState(false);
+  const pathname = usePathname();
 
   // Função para alternar o estado do menu mobile
   const toggleMenu = () => {
@@ -66,11 +76,22 @@ export default function SideBar() {
           />
         </div>
         <ul className="menu">
-          <li className="menu-item">ÉTICA PROFISSIONAL</li>
-          <li className="menu-item active">FÓRUM</li>
-          <li className="menu-item">AGENDAMENTOS</li>
-          <li className="menu-item">HORÁRIOS</li>
-          <li className="menu-item">MONITORIAS</li>
+          {menuItems.map((item) => (
+            <Link
+              style={{ textDecoration: "none", color: "white" }}
+              key={item.label}
+              href={item.path}
+              passHref
+            >
+              <li
+                className={`menu-item ${
+                  pathname === item.path ? "active" : ""
+                }`}
+              >
+                {item.label}
+              </li>
+            </Link>
+          ))}
         </ul>
       </div>
     </div>
