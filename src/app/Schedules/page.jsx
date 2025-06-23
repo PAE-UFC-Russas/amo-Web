@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import SideBar from "../../components/SideBar";
 import ScheduleCard from "../../components/ScheduleCard";
 import { FaUserCircle } from "react-icons/fa";
-import "./page.css";
+import styles from "./page.module.css";
 
 // Dados mocados baseados na imagem
 const professorData = {
@@ -63,10 +63,10 @@ const monitorsData = [
   // Adicione mais monitores se necessário
 ];
 
-// Botão de filtro reutilizável
+// Botão de filtro reutilizável (não usado nesta página)
 const FilterButton = ({ label, isActive, onClick }) => (
   <button
-    className={`filter-btn ${isActive ? "active" : ""}`}
+    className={`${styles.filterBtn} ${isActive ? styles.active : ""}`}
     onClick={onClick}
   >
     {label}
@@ -75,12 +75,11 @@ const FilterButton = ({ label, isActive, onClick }) => (
 
 const SchedulesPage = () => {
   const [activeFilter, setActiveFilter] = useState("Todos");
-
   return (
-    <div className="schedules-container">
+    <div className={styles.container}>
       <SideBar />
-      <main className="schedules-main-content">
-        <header className="schedules-header">
+      <main className={styles.mainContent}>
+        <header className={styles.header}>
           <div className="filter-buttons">
             <FilterButton
               label="Todos"
@@ -103,17 +102,17 @@ const SchedulesPage = () => {
               onClick={() => setActiveFilter("Encerrados")}
             />
           </div>
-          <FaUserCircle className="profile-icon" />
+          <FaUserCircle className={styles.profileIcon} />
         </header>
 
-        <div className="schedules-grid">
-          <div className="professor-column">
+        <div className={styles.grid}>
+          <div className={styles.professorColumn}>
             <ScheduleCard
               type={professorData.type}
               person={professorData.person}
             />
           </div>
-          <div className="monitors-column">
+          <div className={styles.monitorsColumn}>
             {monitorsData.map((monitor) => (
               <ScheduleCard
                 key={monitor.person.id}

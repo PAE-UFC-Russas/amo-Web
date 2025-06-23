@@ -1,5 +1,5 @@
 import Image from "next/image";
-import "./page.css";
+import styles from "./page.module.css";
 import Foto from "../../../assets/perfil.png";
 import Title from "@/components/title";
 import DefaultButton from "@/components/DefaultButton";
@@ -7,12 +7,12 @@ import DefaultButton from "@/components/DefaultButton";
 export default function RegistrationCompleted() {
   return (
     <div className="container-border">
-      <div className="container">
-        <div className="sub-content">
+      <div className={styles.container}>
+        <div className={styles.subContent}>
           <Title title="SEJA BEM VINDO XXXXX" />
 
-          <section className="layout-img">
-            <div className="left-area">
+          <section className={styles.layoutImg}>
+            <div className={styles.leftArea}>
               <Image
                 style={{ height: 200, width: 200 }}
                 src={Foto}
@@ -20,7 +20,7 @@ export default function RegistrationCompleted() {
               />
             </div>
 
-            <div className="right-area">
+            <div className={styles.rightArea}>
               <Title title="AQUI VOCE PODE" />
               <p
                 style={{
@@ -35,7 +35,7 @@ export default function RegistrationCompleted() {
               </p>
             </div>
           </section>
-          <section className="layout-button">
+          <section className={styles.layoutButton}>
             <DefaultButton children="CONCLUIR CADASTRO" />
           </section>
         </div>

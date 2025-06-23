@@ -1,18 +1,11 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
-}
-
-.Forum-container {
+.container {
   display: flex;
   height: 100vh; /* Ocupa a altura total da tela */
   width: 100%;
   background-color: #f0f2f5; /* Cor de fundo suave como na imagem */
 }
 
-.Forum-main-content {
+.mainContent {
   flex-grow: 1; /* Ocupa o espaço restante */
   padding: 20px;
   display: flex;
@@ -20,7 +13,7 @@
   overflow-y: auto; /* Permite rolagem se o conteúdo exceder */
 }
 
-.Forum-header {
+.header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -31,7 +24,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
 }
 
-.Forum-search-bar {
+.searchBar {
   display: flex;
   align-items: center;
   background-color: #e9ecef; /* Cor de fundo da barra de pesquisa */
@@ -40,7 +33,7 @@
   flex-grow: 0.6; /* Ajusta a largura da barra de pesquisa */
 }
 
-.Forum-search-bar .custom-input {
+.searchBar .customInput {
   border: none;
   background-color: transparent;
   margin-left: 10px;
@@ -49,21 +42,21 @@
   color: #495057; /* Cor do texto do input */
 }
 
-.Forum-search-bar .custom-input::placeholder {
+.searchBar .customInput::placeholder {
   color: #6c757d; /* Cor do placeholder */
 }
 
-.Forum-search-icon {
+.searchIcon {
   color: #6c757d; /* Cor do ícone de pesquisa */
 }
 
-.Forum-filters {
+.filters {
   display: flex;
   gap: 10px; /* Espaço entre os botões de filtro */
 }
 
 /* Estilizando DefaultButton especificamente para os filtros */
-.Forum-filters .button-enter {
+.filters .buttonEnter {
   padding: 8px 15px; /* Ajusta o padding dos botões de filtro */
   font-size: 14px; /* Ajusta o tamanho da fonte */
   background-color: #e9ecef; /* Cor de fundo dos botões */
@@ -72,16 +65,16 @@
   border-radius: 20px;
 }
 
-.Forum-filters .button-enter:hover {
+.filters .buttonEnter:hover {
   background-color: #dee2e6;
 }
 
-.Forum-profile-icon {
+.profileIcon {
   color: #024284; /* Cor do ícone de perfil */
   cursor: pointer;
 }
 
-.Forum-posts-grid {
+.postsGrid {
   display: grid;
   grid-template-columns: repeat(
     auto-fill,
@@ -93,32 +86,32 @@
 
 /* Media queries para responsividade */
 @media (max-width: 768px) {
-  .Forum-header {
+  .header {
     flex-direction: column;
     align-items: stretch; /* Faz os itens ocuparem a largura total */
   }
 
-  .Forum-search-bar {
+  .searchBar {
     margin-bottom: 10px; /* Adiciona espaço abaixo da barra de pesquisa em telas menores */
     flex-grow: 1; /* Ocupa toda a largura */
   }
 
-  .Forum-filters {
+  .filters {
     justify-content: center; /* Centraliza os filtros em telas menores */
     margin-bottom: 10px;
   }
 
-  .Forum-profile-icon {
+  .profileIcon {
     align-self: flex-end; /* Alinha o ícone de perfil à direita */
   }
 
-  .Forum-posts-grid {
+  .postsGrid {
     grid-template-columns: 1fr; /* Uma coluna em telas menores */
   }
 }
 
 @media (max-width: 480px) {
-  .Forum-filters .button-enter {
+  .filters .buttonEnter {
     font-size: 12px; /* Reduz o tamanho da fonte dos botões em telas muito pequenas */
     padding: 6px 10px;
   }
@@ -129,7 +122,7 @@
     position: static; /* Remove o posicionamento fixo */
   }
 
-  .Forum-container {
+  .container {
     flex-direction: column; /* Empilha a barra lateral e o conteúdo */
   }
 }

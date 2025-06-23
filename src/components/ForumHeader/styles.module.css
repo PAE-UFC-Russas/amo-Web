@@ -1,4 +1,4 @@
-.ForumHeader-container {
+.container {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -8,13 +8,13 @@
   border-radius: 8px;
 }
 
-.ForumHeader-search-bar-container {
+.searchBarContainer {
   flex-grow: 0.6; /* Ocupa uma porção maior do espaço */
   display: flex;
   align-items: center;
 }
 
-.ForumHeader-search-bar {
+.searchBar {
   display: flex;
   align-items: center;
   background-color: #e9ecef;
@@ -23,7 +23,7 @@
   width: 100%; /* Ocupa toda a largura do container pai */
 }
 
-.ForumHeader-search-bar input {
+.searchBar input {
   padding: 10px;
   border: none;
   background: transparent;
@@ -32,17 +32,18 @@
   outline: none;
   color: #495057;
 }
-.ForumHeader-search-icon {
+
+.searchIcon {
   color: #6c757d;
 }
 
-.ForumHeader-desktop-menu {
+.desktopMenu {
   display: flex;
   align-items: center;
   gap: 15px; /* Espaçamento entre filtros e ícone de perfil */
 }
 
-.ForumHeader-mobile-menu-close-button {
+.mobileMenuCloseButton {
   display: none; /* Escondido por padrão */
   position: absolute;
   top: 15px;
@@ -55,12 +56,12 @@
   z-index: 1001; /* Para ficar acima do conteúdo do menu */
 }
 
-.ForumHeader-filters {
+.filters {
   display: flex;
   gap: 10px;
 }
 
-.ForumHeader-filters .button-enter {
+.filters :global(.button-enter) {
   padding: 8px 15px;
   font-size: 14px;
   background-color: #e9ecef;
@@ -69,16 +70,16 @@
   border-radius: 20px;
 }
 
-.ForumHeader-filters .button-enter:hover {
+.filters :global(.button-enter):hover {
   background-color: #dee2e6;
 }
 
-.ForumHeader-profile-icon {
+.profileIcon {
   color: #024284;
   cursor: pointer;
 }
 
-.ForumHeader-hamburger {
+.hamburger {
   display: none; /* Escondido por padrão em telas maiores */
   cursor: pointer;
   font-size: 24px; /* Tamanho do ícone hambúrguer */
@@ -87,12 +88,12 @@
 
 /* Estilos para o menu hambúrguer quando aberto */
 @media (max-width: 768px) {
-  .ForumHeader-desktop-menu {
+  .desktopMenu {
     display: none; /* Esconde o menu desktop por padrão em mobile */
     /* Outros estilos permanecem, mas serão sobrescritos por .open */
   }
 
-  .ForumHeader-desktop-menu.open {
+  .desktopMenu.open {
     display: flex;
     flex-direction: column;
     position: fixed; /* Alterado para fixed para cobrir a tela */
@@ -109,11 +110,11 @@
     justify-content: flex-start; /* Alinha os itens ao topo */
   }
 
-  .ForumHeader-mobile-menu-close-button {
+  .mobileMenuCloseButton {
     display: block; /* Mostra o botão de fechar no menu mobile aberto */
   }
 
-  .ForumHeader-filters {
+  .filters {
     flex-direction: column;
     align-items: stretch;
     width: 90%; /* Ajusta a largura dos filtros */
@@ -121,22 +122,22 @@
     margin-bottom: 20px; /* Espaço abaixo dos filtros */
   }
 
-  .ForumHeader-filters .button-enter {
+  .filters :global(.button-enter) {
     width: 100%;
     margin-bottom: 5px; /* Espaço entre os botões de filtro */
   }
 
-  .ForumHeader-profile-icon {
+  .profileIcon {
     margin-top: 20px; /* Aumenta o espaço acima do ícone de perfil */
     align-self: center;
     font-size: 50px; /* Aumenta o tamanho do ícone de perfil */
   }
 
-  .ForumHeader-hamburger {
+  .hamburger {
     display: block; /* Mostra o ícone hambúrguer */
   }
 
-  .ForumHeader-search-bar-container {
+  .searchBarContainer {
     flex-grow: 1; /* Barra de pesquisa ocupa todo o espaço restante */
     margin-right: 15px; /* Espaço entre a barra de pesquisa e o hambúrguer */
   }

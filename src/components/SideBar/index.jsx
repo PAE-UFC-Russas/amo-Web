@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
-import "./styles.css";
+import styles from "./styles.module.css";
 
 import Logo from "../../../assets/logoSadebar.png";
 
@@ -44,9 +44,8 @@ export default function SideBar() {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []); // Executa apenas na montagem e desmontagem
-
   // Determina as classes com base nos estados
-  const sidebarClasses = ["sidebar"];
+  const sidebarClasses = [styles.sidebar];
   if (isMobileView) {
     sidebarClasses.push("mobile"); // Adiciona uma classe geral para mobile
     if (!isOpen) {
@@ -54,7 +53,7 @@ export default function SideBar() {
     }
   }
 
-  const contentClasses = ["sidebar-content"];
+  const contentClasses = [styles.sidebarContent];
   if (isMobileView && !isOpen) {
     contentClasses.push("hidden");
   }
@@ -62,12 +61,12 @@ export default function SideBar() {
   return (
     <div className={sidebarClasses.join(" ")}>
       {isMobileView && (
-        <div className="mobile-menu-toggle" onClick={toggleMenu}>
+        <div className={styles.mobileMenuToggle} onClick={toggleMenu}>
           {isOpen ? <FaChevronUp /> : <FaChevronDown />}
         </div>
       )}
       <div className={contentClasses.join(" ")}>
-        <div className="logo">
+        <div className={styles.logo}>
           <Image
             style={{ height: 150, width: 170 }}
             src={Logo}
@@ -75,7 +74,7 @@ export default function SideBar() {
             crossOrigin="anonymous"
           />
         </div>
-        <ul className="menu">
+        <ul className={styles.menu}>
           {menuItems.map((item) => (
             <Link
               style={{ textDecoration: "none", color: "white" }}
@@ -84,8 +83,8 @@ export default function SideBar() {
               passHref
             >
               <li
-                className={`menu-item ${
-                  pathname === item.path ? "active" : ""
+                className={`${styles.menuItem} ${
+                  pathname === item.path ? styles.active : ""
                 }`}
               >
                 {item.label}

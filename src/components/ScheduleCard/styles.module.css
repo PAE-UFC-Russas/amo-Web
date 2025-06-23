@@ -1,5 +1,5 @@
 /* Base styles for all schedule cards */
-.schedule-card {
+.scheduleCard {
   background-color: #ffffff;
   border-radius: 12px;
   padding: 20px;
@@ -11,7 +11,7 @@
 }
 
 /* Header com avatar e nome */
-.card-person-header {
+.cardPersonHeader {
   display: flex;
   align-items: center;
   gap: 15px;
@@ -24,14 +24,14 @@
   object-fit: cover;
 }
 
-.person-info .name {
+.personInfo .name {
   font-weight: bold;
   font-size: 1.1em;
   color: #333;
   margin: 0;
 }
 
-.person-info .role {
+.personInfo .role {
   font-size: 0.9em;
   color: #666;
   margin: 0;
@@ -45,29 +45,56 @@
   margin: 5px 0;
 }
 
+.dividerLight {
+  border: 0;
+  height: 1px;
+  background-color: #e0e0e0;
+  margin: 5px 0;
+}
+
 /* Conteúdo específico */
-.card-content .title {
+.cardContent .title {
   font-weight: bold;
   color: #024284;
   margin-bottom: 8px;
   font-size: 1em;
 }
 
-.class-info,
-.monitoring-info {
+.classInfo,
+.monitoringInfo {
   margin-bottom: 15px;
 }
 
-.class-info p,
-.monitoring-info p,
-.location-info p {
+.classInfo p,
+.monitoringInfo p,
+.locationInfo p {
   margin: 4px 0;
   color: #555;
   font-size: 0.95em;
 }
 
-.schedule-grid {
+.scheduleGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 8px;
+}
+
+.title {
+  font-weight: bold;
+  color: #024284;
+  margin-bottom: 8px;
+  font-size: 1em;
+}
+
+.name {
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #333;
+  margin: 0;
+}
+
+.role {
+  font-size: 0.9em;
+  color: #666;
+  margin: 0;
 }

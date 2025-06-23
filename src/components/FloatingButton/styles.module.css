@@ -1,4 +1,4 @@
-.add-button {
+.addButton {
   position: fixed;
   bottom: 30px; /* Aumenta a distância da parte inferior */
   right: 30px; /* Aumenta a distância da direita */
@@ -17,7 +17,7 @@
   transition: background-color 0.3s ease, transform 0.2s ease; /* Transições suaves */
 }
 
-.add-button:hover {
+.addButton:hover {
   background-color: #013166; /* Cor de fundo mais escura no hover */
   transform: scale(1.1); /* Aumenta ligeiramente o tamanho no hover */
 }

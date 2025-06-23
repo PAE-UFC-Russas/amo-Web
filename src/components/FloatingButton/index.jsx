@@ -1,10 +1,10 @@
 import React from "react";
-import "./styles.css";
+import styles from "./styles.module.css";
 import { FaPlus } from "react-icons/fa"; // Importa o ícone de mais
 
 export default function FloatingButton() {
   return (
-    <button className="add-button">
+    <button className={styles.addButton}>
       <FaPlus />
     </button>
   );

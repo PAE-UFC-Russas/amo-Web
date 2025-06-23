@@ -9,7 +9,7 @@ import FloatingButton from "@/components/FloatingButton";
 import ForumHeader from "@/components/ForumHeader"; // Importa o novo componente
 import { FaUserCircle } from "react-icons/fa"; // Mantido para o ícone de perfil, se necessário como fallback ou passado diretamente
 
-import "./page.css";
+import styles from "./page.module.css";
 import perfil from "../../../assets/perfil.png";
 
 export default function Forum() {
@@ -73,13 +73,12 @@ export default function Forum() {
       isResponded: false,
     },
   ];
-
   return (
-    <div className="Forum-container">
+    <div className={styles.container}>
       <Sidebar />
-      <div className="Forum-main-content">
+      <div className={styles.mainContent}>
         <ForumHeader />
-        <div className="Forum-posts-grid">
+        <div className={styles.postsGrid}>
           {forumPosts.map((post, index) => (
             <Card
               key={index}

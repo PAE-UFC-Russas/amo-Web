@@ -1,36 +1,36 @@
-.schedules-container {
+.container {
   display: flex;
   background-color: #f0f4f8;
   min-height: 100vh;
 }
 
-.schedules-main-content {
+.mainContent {
   flex-grow: 1;
   padding: 30px;
 }
 
-.schedules-header {
+.header {
   display: flex;
   justify-content: flex-end; /* Alinha o ícone de perfil à direita */
   align-items: center;
   margin-bottom: 30px;
 }
 
-.profile-icon {
+.profileIcon {
   font-size: 2.5rem;
   color: #024284;
   cursor: pointer;
 }
 
-.schedules-grid {
+.grid {
   display: grid;
   grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); /* Coluna do professor maior que a do monitor */
   gap: 30px;
   align-items: start; /* Alinha os itens no topo */
 }
 
-.professor-column,
-.monitors-column {
+.professorColumn,
+.monitorsColumn {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -38,11 +38,11 @@
 
 /* Responsividade */
 @media (max-width: 1024px) {
-  .schedules-grid {
+  .grid {
     grid-template-columns: 1fr; /* Uma coluna em telas menores */
   }
 
-  .schedules-main-content {
+  .mainContent {
     padding: 20px;
   }
 }

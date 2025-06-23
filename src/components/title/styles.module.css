@@ -2,7 +2,7 @@
   font-size: 1.8rem;
   text-align: center;
   color: white;
-  white-space: "pre-line";
+  white-space: pre-line;
 }
 
 @media (max-width: 1024px) {

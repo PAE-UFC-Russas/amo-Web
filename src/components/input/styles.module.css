@@ -1,9 +1,9 @@
-.custom-input::placeholder {
+.customInput::placeholder {
   color: white;
   opacity: 1;
 }
 
-.custom-input {
+.customInput {
   width: 100%;
   outline: none;
   padding: 3%;

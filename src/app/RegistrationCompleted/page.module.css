@@ -4,31 +4,31 @@
   background: linear-gradient(to bottom, #024284, #2481b6, #52d6fb);
   height: 100%;
   border-radius: 100px;
-
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
   transition: box-shadow 0.1s ease;
 }
 
-.sub-content {
+.subContent {
   height: 100%;
   display: flex;
   text-align: center;
   flex-direction: column;
   justify-content: space-around;
 }
-.layout-img {
+
+.layoutImg {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
 
-.left-area {
+.leftArea {
   align-items: center;
   width: 40%;
 }
 
-.right-area {
+.rightArea {
   padding: 0px 100px 0px 0px;
   display: flex;
   flex-direction: column;

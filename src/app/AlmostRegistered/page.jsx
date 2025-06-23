@@ -1,4 +1,4 @@
-import "./page.css";
+import styles from "./page.module.css";
 import React from "react";
 
 import Input from "@/components/input";
@@ -9,8 +9,8 @@ import DefaultButton from "@/components/DefaultButton";
 export default function AlmostRegistered() {
   return (
     <div className="container-border">
-      <div className="page">
-        <div className="container-mobile">
+      <div className={styles.page}>
+        <div className={styles.containerMobile}>
           <Title title="ESTAMOS QUASE LA" />
           <Input placeholder="EMAIL" />
           <Input placeholder="SENHA" />
@@ -22,7 +22,7 @@ export default function AlmostRegistered() {
           <Input placeholder="ANO DE ENTRADA" />
         </div>
 
-        <div className="right-area">
+        <div className={styles.rightArea}>
           <Title title="CADASTRE-SE" />
           <Input placeholder="EMAIL" />
           <Input placeholder="SENHA" />
@@ -32,7 +32,7 @@ export default function AlmostRegistered() {
 
         <VerticalLine />
 
-        <div className="left-area">
+        <div className={styles.leftArea}>
           <Title title="ESTAMOS QUASE LA" />
           <Input placeholder="NOME DE USUÁRIO" />
           <Input placeholder="NOME COMPLETO" />

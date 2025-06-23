@@ -1,4 +1,4 @@
-import "./page.css";
+import styles from "./page.module.css";
 import Image from "next/image";
 
 import Input from "@/components/input";
@@ -11,8 +11,8 @@ import Foto from "../../../assets/perfil.png";
 export default function ProfilePicture() {
   return (
     <div className="container-border">
-      <div className="page">
-        <div className="right-area">
+      <div className={styles.page}>
+        <div className={styles.rightArea}>
           <Title title="ESTAMOS QUASE LA" />
           <Input placeholder="NOME DE USUARIO" />
           <Input placeholder="NOME COMPLETO" />
@@ -23,7 +23,7 @@ export default function ProfilePicture() {
 
         <VerticalLine />
 
-        <div className="left-area">
+        <div className={styles.leftArea}>
           <Title title="SELECIONE SUA FOTO DE PERFIL" />
           <Image
             style={{ height: 200, width: 200 }}

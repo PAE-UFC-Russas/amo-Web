@@ -1,4 +1,4 @@
-import "./page.css";
+import styles from "./page.module.css";
 import React from "react";
 import VerticalLine from "@/components/verticalLine";
 import Title from "@/components/title";
@@ -8,8 +8,8 @@ import SubjectButton from "@/components/SubjectButton";
 export default function SelectMonitoring() {
   return (
     <div className="container-border">
-      <div className="page">
-        <div className="right-area">
+      <div className={styles.page}>
+        <div className={styles.rightArea}>
           <Title title="SELECIONE O CURSO QUE A MONITORIA PERTENCE:" />
           <SubjectButton subject={{ name: "Engenharia Civil" }} />
           <SubjectButton subject={{ name: "Engenharia de Produção" }} />
@@ -19,7 +19,7 @@ export default function SelectMonitoring() {
 
         <VerticalLine />
 
-        <div className="left-area">
+        <div className={styles.leftArea}>
           <SubjectButton subject={{ name: "Engenharia Civil" }} />
           <SubjectButton subject={{ name: "Engenharia de Produção" }} />
           <SubjectButton subject={{ name: "Engenharia de Software" }} />

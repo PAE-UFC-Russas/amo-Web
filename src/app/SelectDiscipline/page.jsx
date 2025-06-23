@@ -1,4 +1,4 @@
-import "./page.css";
+import styles from "./page.module.css";
 import React from "react";
 import Title from "@/components/title";
 import SubjectButton from "@/components/SubjectButton";
@@ -6,8 +6,8 @@ import SubjectButton from "@/components/SubjectButton";
 export default function SelectDiscipline() {
   return (
     <div className="container-border">
-      <div className="page">
-        <div className="buttons-area">
+      <div className={styles.page}>
+        <div className={styles.buttonsArea}>
           <Title title={"SELECIONE O CURSO QUE A MONITORIA PERTENCE"} />
           <SubjectButton subject={{ name: "Engenharia Civil" }} />
           <SubjectButton subject={{ name: "Engenharia de Produção" }} />

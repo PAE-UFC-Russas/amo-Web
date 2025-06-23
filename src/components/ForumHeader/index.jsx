@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { FaSearch, FaUserCircle, FaBars, FaTimes } from "react-icons/fa";
 import DefaultButton from "@/components/DefaultButton";
-import "./styles.css";
+import styles from "./styles.module.css";
 
 export default function ForumHeader({ children }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -43,40 +43,36 @@ export default function ForumHeader({ children }) {
       child.type === FaUserCircle ||
       (child.props && child.props.id === "forum-profile-icon")
   );
-
   return (
-    <div className="ForumHeader-container">
-      <div className="ForumHeader-search-bar-container">
+    <div className={styles.container}>
+      <div className={styles.searchBarContainer}>
         {searchBar ? (
-          <div className="ForumHeader-search-bar">
-            <FaSearch className="ForumHeader-search-icon" />
+          <div className={styles.searchBar}>
+            <FaSearch className={styles.searchIcon} />
             {searchBar}
           </div>
         ) : (
           // Fallback ou renderização condicional se searchBar não for encontrado
-          <div className="ForumHeader-search-bar">
-            <FaSearch className="ForumHeader-search-icon" />
+          <div className={styles.searchBar}>
+            <FaSearch className={styles.searchIcon} />
             <input placeholder="PESQUISAR DÚVIDAS..." />
           </div>
         )}
       </div>
 
       {/* Ícone do Hambúrguer sempre visível, mas o ícone interno muda */}
-      <div className="ForumHeader-hamburger" onClick={toggleMenu}>
+      <div className={styles.hamburger} onClick={toggleMenu}>
         {isMenuOpen && window.innerWidth <= 768 ? null : <FaBars />}
       </div>
 
       {/* Menu que cobre a tela em mobile e é dropdown em desktop */}
-      <div className={`ForumHeader-desktop-menu ${isMenuOpen ? "open" : ""}`}>
+      <div className={`${styles.desktopMenu} ${isMenuOpen ? styles.open : ""}`}>
         {isMenuOpen && window.innerWidth <= 768 && (
-          <button
-            className="ForumHeader-mobile-menu-close-button"
-            onClick={toggleMenu}
-          >
+          <button className={styles.mobileMenuCloseButton} onClick={toggleMenu}>
             <FaTimes />
           </button>
         )}
-        <div className="ForumHeader-filters">
+        <div className={styles.filters}>
           {filters.length > 0 ? (
             filters
           ) : (
@@ -89,7 +85,7 @@ export default function ForumHeader({ children }) {
           )}
         </div>
         {profileIcon || (
-          <FaUserCircle size={40} className="ForumHeader-profile-icon" />
+          <FaUserCircle size={40} className={styles.profileIcon} />
         )}
       </div>
     </div>

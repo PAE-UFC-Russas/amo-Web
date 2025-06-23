@@ -1,4 +1,4 @@
-import "./page.css";
+import styles from "./page.module.css";
 
 import Input from "@/components/input";
 import VerticalLine from "@/components/verticalLine";
@@ -9,14 +9,14 @@ import DefaultButton from "@/components/DefaultButton";
 export default function TeacherRegistration() {
   return (
     <div className="container-border">
-      <div className="page">
-        <div className="right-area">
+      <div className={styles.page}>
+        <div className={styles.rightArea}>
           <About />
         </div>
 
         <VerticalLine />
 
-        <div className="left-area">
+        <div className={styles.leftArea}>
           <Title title="CADASTRE PROFESSOR" />
 
           <p

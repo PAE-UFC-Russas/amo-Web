@@ -1,9 +1,9 @@
-import "./styles.css";
+import styles from "./styles.module.css";
 
 export default function SubjectButton({ subject, onClick }) {
   return (
-    <div className="subject-button" onClick={onClick}>
-      <div className="subject-button-content">
+    <div className={styles.subjectButton} onClick={onClick}>
+      <div className={styles.subjectButtonContent}>
         <span>{subject.name}</span>
       </div>
     </div>

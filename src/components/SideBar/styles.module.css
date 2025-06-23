@@ -22,7 +22,7 @@
   width: 100%; /* Faz o menu ocupar toda a largura da barra lateral */
 }
 
-.menu-item {
+.menuItem {
   padding: 15px 20px; /* Aumenta o preenchimento */
   margin: 10px 0; /* Aumenta a margem */
   cursor: pointer;
@@ -31,11 +31,11 @@
   transition: background-color 0.3s ease; /* Adiciona transição suave */
 }
 
-.menu-item:hover {
+.menuItem:hover {
   background-color: rgba(255, 255, 255, 0.1); /* Efeito de hover sutil */
 }
 
-.menu-item.active {
+.menuItem.active {
   border-radius: 5px 0px 0px 5px;
   background-color: #52d6fb; /* Cor de destaque para o item ativo */
   color: #024284; /* Cor do texto para o item ativo */
@@ -43,7 +43,7 @@
   margin-left: 20px;
 }
 
-.mobile-menu-toggle {
+.mobileMenuToggle {
   display: none; /* Escondido por padrão */
   position: absolute;
   top: 10px;
@@ -58,7 +58,7 @@
   /* border-radius: 50%; /* Opcional */
 }
 
-.sidebar-content {
+.sidebarContent {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -88,7 +88,7 @@
     overflow-y: auto; /* Permite rolagem se o conteúdo for maior */
   }
 
-  .sidebar.mobile .mobile-menu-toggle {
+  .sidebar.mobile :global(.mobileMenuToggle) {
     display: flex; /* Mostra o botão de toggle */
     align-items: center;
     justify-content: center;
@@ -100,28 +100,18 @@
     height: 60px; /* Altura da área do toggle */
     background-color: #024284; /* Cor de fundo para a barra do toggle */
     border-bottom: 1px solid #013166; /* Linha sutil abaixo do toggle */
-    /* As propriedades cursor, font-size, color, z-index são herdadas da regra .mobile-menu-toggle se aplicável */
   }
 
-  .sidebar.mobile .sidebar-content {
+  .sidebar.mobile :global(.sidebarContent) {
     padding: 15px; /* Adiciona padding ao conteúdo interno */
-    /* transform: translateY(100%); /* Começa fora da tela (embaixo) */
-    /* opacity: 1; /* Já visível, o controle será pelo max-height da sidebar */
   }
 
-  .sidebar.mobile.collapsed .sidebar-content {
-    /* opacity: 0; 
-    /* transform: translateY(100%); 
-    /* pointer-events: none; 
-    /* height: 0; 
-    /* overflow: hidden; 
-    /* A visibilidade do conteúdo será controlada pelo max-height do .sidebar.mobile */
-    /* e pela classe .hidden no JS se necessário, mas primariamente pelo colapso do pai */
+  .sidebar.mobile.collapsed :global(.sidebarContent) {
     padding: 0; /* Remove padding quando colapsado para evitar espaço extra */
   }
 
-  /* A classe .hidden no sidebar-content ainda pode ser útil para esconder completamente */
-  .sidebar.mobile .sidebar-content.hidden {
+  /* A classe .hidden no sidebarContent ainda pode ser útil para esconder completamente */
+  .sidebar.mobile :global(.sidebarContent).hidden {
     max-height: 0; /* Garante que não ocupe espaço */
     opacity: 0;
     pointer-events: none;
@@ -129,7 +119,7 @@
     margin: 0;
   }
 
-  .sidebar.mobile .logo {
+  .sidebar.mobile :global(.logo) {
     margin-top: 10px; /* Espaço acima do logo quando aberto */
     margin-bottom: 15px;
     display: flex; /* Adicionado para centralizar a imagem dentro do div .logo */
@@ -137,13 +127,13 @@
     width: 100%; /* Garante que o contêiner do logo ocupe a largura para centralização */
   }
 
-  .sidebar.mobile .logo img {
+  .sidebar.mobile :global(.logo) img {
     /* Supondo que a tag da imagem seja img, ajuste se for diferente */
     max-width: 150px; /* Exemplo de tamanho máximo para o logo em mobile */
     height: auto; /* Mantém a proporção */
   }
 
-  .sidebar.mobile .menu-item {
+  .sidebar.mobile :global(.menuItem) {
     padding: 12px 15px;
     font-size: 0.9em;
   }

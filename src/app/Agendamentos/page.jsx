@@ -4,7 +4,7 @@ import SideBar from "../../components/SideBar";
 import AppointmentCard from "../../components/AppointmentCard";
 import FloatingButton from "../../components/FloatingButton";
 import { FaUserCircle } from "react-icons/fa";
-import "./page.css";
+import styles from "./page.module.css";
 
 // Dados mocados baseados na imagem
 const appointments = [
@@ -44,7 +44,7 @@ const appointments = [
 
 const FilterButton = ({ label, isActive, onClick }) => (
   <button
-    className={`filter-btn ${isActive ? "active" : ""}`}
+    className={`${styles.filterBtn} ${isActive ? styles.active : ""}`}
     onClick={onClick}
   >
     {label}
@@ -60,13 +60,12 @@ const AgendamentosPage = () => {
     // Para outros filtros como 'Aguardando', 'Cancelado', 'Encerrados'
     return app.status === activeFilter;
   });
-
   return (
-    <div className="agendamentos-container">
+    <div className={styles.container}>
       <SideBar />
-      <main className="agendamentos-main-content">
-        <header className="agendamentos-header">
-          <div className="filter-buttons">
+      <main className={styles.mainContent}>
+        <header className={styles.header}>
+          <div className={styles.filterButtons}>
             <FilterButton
               label="Todos"
               isActive={activeFilter === "Todos"}
@@ -88,12 +87,12 @@ const AgendamentosPage = () => {
               onClick={() => setActiveFilter("Encerrados")}
             />
           </div>
-          <FaUserCircle className="profile-icon" />
+          <FaUserCircle className={styles.profileIcon} />
         </header>
 
-        <h2 className="agendamentos-title">MEUS AGENDAMENTOS:</h2>
+        <h2 className={styles.title}>MEUS AGENDAMENTOS:</h2>
 
-        <div className="appointments-list">
+        <div className={styles.appointmentsList}>
           {filteredAppointments.map((app) => (
             <AppointmentCard
               key={app.id}

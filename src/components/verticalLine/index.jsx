@@ -1,5 +1,5 @@
-import "./styles.css";
+import styles from "./styles.module.css";
 
 export default function VerticalLine() {
-  return <div className="vertical-line"></div>;
+  return <div className={styles.verticalLine}></div>;
 }

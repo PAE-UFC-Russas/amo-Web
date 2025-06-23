@@ -1,17 +1,17 @@
 import Image from "next/image";
 import Logo from "../../../assets/logo-1.png";
 
-import "./styles.css";
+import styles from "./styles.module.css";
 export default function About() {
   return (
-    <div className="about-container">
+    <div className={styles.container}>
       <Image
         style={{ height: 130, width: 220 }}
         src={Logo}
         alt="Logo"
         crossOrigin="anonymous"
       />
-      <section className="section-text">
+      <section className={styles.sectionText}>
         <p style={{ color: "white", textAlign: "justify", fontSize: "90%" }}>
           O AMO É UM APLICATIVO TOTALMENTE IDEALIZADO E DESENVOLVIDO POR ALUNOS
           DA UNIVERSIDADE FEDERAL DO CEARÁ, QUE DIANTE DAS DIFICULDADES
