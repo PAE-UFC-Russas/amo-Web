@@ -1,0 +1,237 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modalContent {
+  background-color: white;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  animation: modalAppear 0.3s ease-out;
+}
+
+@keyframes modalAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px 15px 30px;
+  border-bottom: 1px solid #e0e0e0;
+  position: relative;
+}
+
+.modalTitle {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #024284;
+  margin: 0;
+  text-align: center;
+  flex: 1;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #666;
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  transition: all 0.2s ease;
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.closeButton:hover {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.modalForm {
+  padding: 30px;
+}
+
+.inputGroup {
+  margin-bottom: 25px;
+  position: relative;
+}
+
+.titleInput {
+  width: 100%;
+  padding: 15px 20px;
+  border: 2px solid #024284;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  background-color: #f8f9fa;
+}
+
+.titleInput:focus {
+  border-color: #0066cc;
+  box-shadow: 0 0 0 3px rgba(2, 66, 132, 0.1);
+  background-color: white;
+}
+
+.titleInput::placeholder {
+  color: #666;
+  font-weight: 400;
+}
+
+.descriptionInput {
+  width: 100%;
+  padding: 15px 20px;
+  border: 2px solid #024284;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+  resize: vertical;
+  min-height: 120px;
+  font-family: inherit;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  background-color: #f8f9fa;
+}
+
+.descriptionInput:focus {
+  border-color: #0066cc;
+  box-shadow: 0 0 0 3px rgba(2, 66, 132, 0.1);
+  background-color: white;
+}
+
+.descriptionInput::placeholder {
+  color: #666;
+  font-weight: 400;
+}
+
+.inputHint {
+  display: block;
+  font-size: 14px;
+  color: #666;
+  margin-top: 8px;
+  margin-left: 4px;
+}
+
+.characterCount {
+  position: absolute;
+  bottom: -20px;
+  right: 4px;
+  font-size: 12px;
+  color: #999;
+}
+
+.submitButton {
+  background-color: #024284;
+  color: white;
+  border: none;
+  padding: 15px 40px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.submitButton:hover {
+  background-color: #013166;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(2, 66, 132, 0.3);
+}
+
+.submitButton:active {
+  transform: translateY(0);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .modalOverlay {
+    padding: 10px;
+  }
+
+  .modalContent {
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .modalHeader {
+    padding: 15px 20px 10px 20px;
+  }
+
+  .modalTitle {
+    font-size: 1.1rem;
+  }
+
+  .modalForm {
+    padding: 20px;
+  }
+
+  .titleInput,
+  .descriptionInput {
+    padding: 12px 15px;
+    font-size: 14px;
+  }
+
+  .inputHint {
+    font-size: 13px;
+  }
+
+  .submitButton {
+    padding: 12px 30px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modalOverlay {
+    padding: 5px;
+  }
+
+  .modalHeader {
+    padding: 12px 15px 8px 15px;
+  }
+
+  .modalTitle {
+    font-size: 1rem;
+  }
+
+  .modalForm {
+    padding: 15px;
+  }
+
+  .closeButton {
+    right: 15px;
+  }
+}

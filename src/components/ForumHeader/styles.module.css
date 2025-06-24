@@ -55,6 +55,27 @@
   cursor: pointer;
   z-index: 1001; /* Para ficar acima do conteúdo do menu */
 }
+.filterBtn {
+  background-color: white;
+  color: #024284;
+  border: 1px solid #b0c4de;
+  padding: 10px 25px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.filterBtn:hover {
+  background-color: #e6f0ff;
+  border-color: #024284;
+}
+
+.filterBtn.active {
+  background-color: #024284;
+  color: white;
+  border-color: #024284;
+}
 
 .filters {
   display: flex;

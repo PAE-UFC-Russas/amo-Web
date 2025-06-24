@@ -15,9 +15,14 @@ export default function Card({
   likes,
   isResponded,
   avatar,
+  onClick,
 }) {
   return (
-    <div className={`${styles.card} ${isResponded ? styles.responded : ""}`}>
+    <div
+      className={`${styles.card} ${isResponded ? styles.responded : ""}`}
+      onClick={onClick}
+      style={{ cursor: onClick ? "pointer" : "default" }}
+    >
       <div className={styles.cardHeader}>
         {avatar ? (
           <Image

@@ -4,7 +4,17 @@ import { FaSearch, FaUserCircle, FaBars, FaTimes } from "react-icons/fa";
 import DefaultButton from "@/components/DefaultButton";
 import styles from "./styles.module.css";
 
+const FilterButton = ({ label, isActive, onClick }) => (
+  <button
+    className={`${styles.filterBtn} ${isActive ? styles.active : ""}`}
+    onClick={onClick}
+  >
+    {label}
+  </button>
+);
+
 export default function ForumHeader({ children }) {
+  const [activeFilter, setActiveFilter] = useState("Todos");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -78,9 +88,21 @@ export default function ForumHeader({ children }) {
           ) : (
             // Fallback ou renderização condicional se filters não forem encontrados
             <>
-              <DefaultButton>Respondidas</DefaultButton>
-              <DefaultButton>Mais curtidas</DefaultButton>
-              <DefaultButton>Recentes</DefaultButton>
+              <FilterButton
+                label="Todos"
+                isActive={activeFilter === "Respondidas"}
+                onClick={() => setActiveFilter("Respondidas")}
+              />
+              <FilterButton
+                label="Aguardando"
+                isActive={activeFilter === "Mais Curtidas"}
+                onClick={() => setActiveFilter("Mais Curtidas")}
+              />
+              <FilterButton
+                label="Confirmados"
+                isActive={activeFilter === "Recentes"}
+                onClick={() => setActiveFilter("Recentes")}
+              />
             </>
           )}
         </div>

@@ -1,10 +1,13 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Image from "next/image";
 // Removido FaSearch e FaUserCircle daqui, pois serão passados como children para ForumHeader
 
 import Sidebar from "@/components/SideBar";
 import Card from "@/components/Card";
 import FloatingButton from "@/components/FloatingButton";
+import RegisterDoubt from "@/components/RegisterDoubt";
+import AnswerQuestions from "@/components/AnswerQuestions";
 
 import ForumHeader from "@/components/ForumHeader"; // Importa o novo componente
 import { FaUserCircle } from "react-icons/fa"; // Mantido para o ícone de perfil, se necessário como fallback ou passado diretamente
@@ -13,6 +16,27 @@ import styles from "./page.module.css";
 import perfil from "../../../assets/perfil.png";
 
 export default function Forum() {
+  const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+  const [isAnswerModalOpen, setIsAnswerModalOpen] = useState(false);
+  const [selectedQuestion, setSelectedQuestion] = useState(null);
+
+  const handleOpenRegisterModal = () => {
+    setIsRegisterModalOpen(true);
+  };
+
+  const handleCloseRegisterModal = () => {
+    setIsRegisterModalOpen(false);
+  };
+
+  const handleOpenAnswerModal = (question) => {
+    setSelectedQuestion(question);
+    setIsAnswerModalOpen(true);
+  };
+
+  const handleCloseAnswerModal = () => {
+    setIsAnswerModalOpen(false);
+    setSelectedQuestion(null);
+  };
   const forumPosts = [
     {
       author: "GIOVANA ARAUJO",
@@ -26,58 +50,55 @@ export default function Forum() {
       avatar: perfil,
     },
     {
-      author: "JOSIMEIRE NOGUEIRA",
-      title: "FREQUÊNCIA SESCOMP",
+      author: "GIOVANA ARAUJO",
+      title: "QUANTIDADE DE MEMBROS DO TRABALHO",
       description:
-        "Os participantes que tiverem 10h de sescomp estarei dando 1 ponto na prova",
+        "O seminário pode ser feito com até quantas pessoas na equipe?",
       date: "17/04/2024",
       comments: 7,
       likes: 3,
-      isResponded: false,
+      isResponded: true,
       avatar: perfil,
     },
     {
-      author: "PEDRO HENRIQUE",
-      title: "NÃO HAVERÁ MONITORIA NO DIA 20/05",
-      description: "Gente tenho uma consulta, não posso comparecer a monitoria",
+      author: "GIOVANA ARAUJO",
+      title: "QUANTIDADE DE MEMBROS DO TRABALHO",
+      description:
+        "O seminário pode ser feito com até quantas pessoas na equipe?",
       date: "17/04/2024",
       comments: 7,
       likes: 3,
-      isResponded: false,
+      isResponded: true,
+      avatar: perfil,
     },
     {
-      author: "PEDRO HENRIQUE",
-      title: "",
-      description: "Gente tenho uma consulta, não posso comparecer a monitoria",
+      author: "GIOVANA ARAUJO",
+      title: "QUANTIDADE DE MEMBROS DO TRABALHO",
+      description:
+        "O seminário pode ser feito com até quantas pessoas na equipe?",
       date: "17/04/2024",
       comments: 7,
       likes: 3,
-      isResponded: false,
+      isResponded: true,
+      avatar: perfil,
     },
     {
-      author: "PEDRO HENRIQUE",
-      title: "",
-      description: "Gente tenho uma consulta, não posso comparecer a monitoria",
+      author: "GIOVANA ARAUJO",
+      title: "QUANTIDADE DE MEMBROS DO TRABALHO",
+      description:
+        "O seminário pode ser feito com até quantas pessoas na equipe?",
       date: "17/04/2024",
       comments: 7,
       likes: 3,
-      isResponded: false,
-    },
-    {
-      author: "PEDRO HENRIQUE",
-      title: "",
-      description: "Gente tenho uma consulta, não posso comparecer a monitoria",
-      date: "17/04/2024",
-      comments: 7,
-      likes: 3,
-      isResponded: false,
+      isResponded: true,
+      avatar: perfil,
     },
   ];
   return (
     <div className={styles.container}>
       <Sidebar />
       <div className={styles.mainContent}>
-        <ForumHeader />
+        <ForumHeader />{" "}
         <div className={styles.postsGrid}>
           {forumPosts.map((post, index) => (
             <Card
@@ -90,10 +111,21 @@ export default function Forum() {
               likes={post.likes}
               isResponded={post.isResponded}
               avatar={post.avatar}
+              onClick={() => handleOpenAnswerModal(post)}
             />
           ))}
         </div>
-        <FloatingButton />
+        <FloatingButton onClick={handleOpenRegisterModal} />
+        <RegisterDoubt
+          isOpen={isRegisterModalOpen}
+          onClose={handleCloseRegisterModal}
+          title="CADASTRAR DÚVIDA"
+        />
+        <AnswerQuestions
+          isOpen={isAnswerModalOpen}
+          onClose={handleCloseAnswerModal}
+          question={selectedQuestion}
+        />
       </div>
     </div>
   );

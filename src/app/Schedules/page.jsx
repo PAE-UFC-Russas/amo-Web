@@ -80,7 +80,7 @@ const SchedulesPage = () => {
       <SideBar />
       <main className={styles.mainContent}>
         <header className={styles.header}>
-          <div className="filter-buttons">
+          <div className={styles.filterButtons}>
             <FilterButton
               label="Todos"
               isActive={activeFilter === "Todos"}

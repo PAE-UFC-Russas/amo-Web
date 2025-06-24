@@ -13,7 +13,7 @@
   font-size: 28px; /* Tamanho do ícone */
   cursor: pointer;
   border: none; /* Remove a borda padrão do botão */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adiciona sombra */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Adiciona sombra */
   transition: background-color 0.3s ease, transform 0.2s ease; /* Transições suaves */
 }
 
