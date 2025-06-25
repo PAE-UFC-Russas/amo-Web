@@ -1,13 +1,15 @@
 import axios from "axios";
 
+// Configuração para desenvolvimento (usando proxy do Next.js)
+const isDevelopment = process.env.NODE_ENV === "development";
+
 const api = axios.create({
-  baseURL: "https://amo-backend-aa73.onrender.com/",
+  baseURL: isDevelopment
+    ? "/api/backend/" // Usa o proxy do Next.js em desenvolvimento
+    : "https://amo-backend-aa73.onrender.com/", // URL direta em produção
   headers: {
     "Content-Type": "application/json",
-    Accept: "application/json",
   },
-  withCredentials: false, // Importante para CORS
-  timeout: 10000, // Timeout de 10 segundos
 });
 
 // Interceptador de requisição para adicionar token automaticamente
@@ -47,18 +49,9 @@ api.interceptors.response.use(
 
     // Tratamento específico para erros de CORS
     if (error.code === "ERR_NETWORK" || error.message.includes("CORS")) {
-      console.error("❌ Erro de CORS detectado!");
-      console.error("O backend precisa configurar os headers:");
-      console.error("- Access-Control-Allow-Origin");
-      console.error("- Access-Control-Allow-Methods");
-      console.error("- Access-Control-Allow-Headers");
-
-      // Retorna um erro mais amigável
-      const corsError = new Error(
-        "Erro de conexão com o servidor. Entre em contato com o administrador."
+      console.error(
+        "Erro de CORS detectado. Verifique a configuração do servidor."
       );
-      corsError.isCorsError = true;
-      return Promise.reject(corsError);
     }
 
     return Promise.reject(error);

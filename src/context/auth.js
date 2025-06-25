@@ -31,10 +31,15 @@ export default function AuthContextProvider({ children }) {
   }
   async function Login(user) {
     try {
+      console.log("🔄 Tentando fazer login...");
+
       const response = await api.post(API_ENDPOINTS.LOGIN, {
         username: user.email,
         password: user.password,
       });
+
+      console.log("✅ Resposta recebida:", response.status);
+
       const token = response.data.token;
       const userData = await GetUser(token);
 
@@ -52,7 +57,29 @@ export default function AuthContextProvider({ children }) {
 
       return undefined;
     } catch (error) {
-      return error.response?.data;
+      console.error("❌ Erro no login:", error);
+
+      // Tratamento específico para erro de CORS
+      if (error.isCorsError) {
+        return {
+          erro: "Erro de conexão com o servidor. Verifique sua internet ou entre em contato com o suporte.",
+        };
+      }
+
+      // Tratamento para outros erros de rede
+      if (error.code === "ERR_NETWORK") {
+        return {
+          erro: "Não foi possível conectar ao servidor. Verifique sua conexão.",
+        };
+      }
+
+      // Tratamento para erros de resposta HTTP
+      if (error.response?.data) {
+        return error.response.data;
+      }
+
+      // Erro genérico
+      return { erro: "Erro interno. Tente novamente." };
     }
   }
   async function Register(newUser) {
