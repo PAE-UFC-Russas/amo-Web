@@ -9,7 +9,7 @@ import DefaultButton from "@/components/DefaultButton";
 
 // Força renderização dinâmica - DESABILITA SSR COMPLETAMENTE
 export const dynamic = "force-dynamic";
-export const runtime = "edge";
+export const runtime = "nodejs";
 
 export default function AlmostRegistered() {
   const [mounted, setMounted] = useState(false);
@@ -41,12 +41,102 @@ export default function AlmostRegistered() {
     // Implementar lógica de envio
   };
 
-  // LOADING STATE EXTREMAMENTE SIMPLES
+  // Renderização condicional completa - SSR vs Cliente
   if (!mounted) {
     return (
-      <div style={{ padding: "20px", textAlign: "center" }}>Carregando...</div>
+      <div className="container-border">
+        <div className={styles.page}>
+          <div className={styles.containerMobile}>
+            <Title title="ESTAMOS QUASE LA" />
+            <input
+              placeholder="EMAIL"
+              style={{ width: "100%", padding: "10px", margin: "5px 0" }}
+            />
+            <input
+              placeholder="SENHA"
+              type="password"
+              style={{ width: "100%", padding: "10px", margin: "5px 0" }}
+            />
+            <input
+              placeholder="CONFIRMA SENHA"
+              type="password"
+              style={{ width: "100%", padding: "10px", margin: "5px 0" }}
+            />
+            <input
+              placeholder="NOME DE USUÁRIO"
+              style={{ width: "100%", padding: "10px", margin: "5px 0" }}
+            />
+            <input
+              placeholder="NOME COMPLETO"
+              style={{ width: "100%", padding: "10px", margin: "5px 0" }}
+            />
+            <input
+              placeholder="MATRÍCULA"
+              style={{ width: "100%", padding: "10px", margin: "5px 0" }}
+            />
+            <input
+              placeholder="SELECIONAR CURSO"
+              style={{ width: "100%", padding: "10px", margin: "5px 0" }}
+            />
+            <input
+              placeholder="ANO DE ENTRADA"
+              style={{ width: "100%", padding: "10px", margin: "5px 0" }}
+            />
+          </div>
+          <div className={styles.rightArea}>
+            <Title title="CADASTRE-SE" />
+            <input
+              placeholder="EMAIL"
+              style={{ width: "100%", padding: "10px", margin: "5px 0" }}
+            />
+            <input
+              placeholder="SENHA"
+              type="password"
+              style={{ width: "100%", padding: "10px", margin: "5px 0" }}
+            />
+            <input
+              placeholder="CONFIRMA SENHA"
+              type="password"
+              style={{ width: "100%", padding: "10px", margin: "5px 0" }}
+            />
+            <input
+              placeholder="SELECIONAR PERFIL"
+              style={{ width: "100%", padding: "10px", margin: "5px 0" }}
+            />
+          </div>
+          <VerticalLine />
+          <div className={styles.leftArea}>
+            <Title title="ESTAMOS QUASE LA" />
+            <input
+              placeholder="NOME DE USUÁRIO"
+              style={{ width: "100%", padding: "10px", margin: "5px 0" }}
+            />
+            <input
+              placeholder="NOME COMPLETO"
+              style={{ width: "100%", padding: "10px", margin: "5px 0" }}
+            />
+            <input
+              placeholder="MATRÍCULA"
+              style={{ width: "100%", padding: "10px", margin: "5px 0" }}
+            />
+            <input
+              placeholder="SELECIONAR CURSO"
+              style={{ width: "100%", padding: "10px", margin: "5px 0" }}
+            />
+            <input
+              placeholder="ANO DE ENTRADA"
+              style={{ width: "100%", padding: "10px", margin: "5px 0" }}
+            />
+            <button style={{ padding: "10px 20px", margin: "10px 0" }}>
+              Prosseguir
+            </button>
+          </div>
+        </div>
+      </div>
     );
   }
+
+  // RENDERIZAÇÃO INTERATIVA - SOMENTE NO CLIENTE
   return (
     <div className="container-border">
       <div className={styles.page}>
