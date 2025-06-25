@@ -3,6 +3,8 @@ import styles from "./page.module.css";
 import React, { useState, useEffect } from "react";
 
 import Input from "@/components/input";
+import StaticInput from "@/components/StaticInput";
+import StaticButton from "@/components/StaticButton";
 import VerticalLine from "@/components/verticalLine";
 import Title from "@/components/title";
 import DefaultButton from "@/components/DefaultButton";
@@ -39,7 +41,6 @@ export default function AlmostRegistered() {
     console.log("Form data:", formData);
     // Implementar lógica de envio
   };
-
   // Render loading durante SSR
   if (!mounted) {
     return (
@@ -47,31 +48,31 @@ export default function AlmostRegistered() {
         <div className={styles.page}>
           <div className={styles.containerMobile}>
             <Title title="ESTAMOS QUASE LA" />
-            <Input placeholder="EMAIL" />
-            <Input placeholder="SENHA" type="password" />
-            <Input placeholder="CONFIRMA SENHA" type="password" />
-            <Input placeholder="NOME DE USUÁRIO" />
-            <Input placeholder="NOME COMPLETO" />
-            <Input placeholder="MATRÍCULA" />
-            <Input placeholder="SELECIONAR CURSO" />
-            <Input placeholder="ANO DE ENTRADA" />
+            <StaticInput placeholder="EMAIL" />
+            <StaticInput placeholder="SENHA" type="password" />
+            <StaticInput placeholder="CONFIRMA SENHA" type="password" />
+            <StaticInput placeholder="NOME DE USUÁRIO" />
+            <StaticInput placeholder="NOME COMPLETO" />
+            <StaticInput placeholder="MATRÍCULA" />
+            <StaticInput placeholder="SELECIONAR CURSO" />
+            <StaticInput placeholder="ANO DE ENTRADA" />
           </div>
           <div className={styles.rightArea}>
             <Title title="CADASTRE-SE" />
-            <Input placeholder="EMAIL" />
-            <Input placeholder="SENHA" type="password" />
-            <Input placeholder="CONFIRMA SENHA" type="password" />
-            <Input placeholder="SELECIONAR PERFIL" />
+            <StaticInput placeholder="EMAIL" />
+            <StaticInput placeholder="SENHA" type="password" />
+            <StaticInput placeholder="CONFIRMA SENHA" type="password" />
+            <StaticInput placeholder="SELECIONAR PERFIL" />
           </div>
           <VerticalLine />
           <div className={styles.leftArea}>
             <Title title="ESTAMOS QUASE LA" />
-            <Input placeholder="NOME DE USUÁRIO" />
-            <Input placeholder="NOME COMPLETO" />
-            <Input placeholder="MATRÍCULA" />
-            <Input placeholder="SELECIONAR CURSO" />
-            <Input placeholder="ANO DE ENTRADA" />
-            <DefaultButton>Prosseguir</DefaultButton>
+            <StaticInput placeholder="NOME DE USUÁRIO" />
+            <StaticInput placeholder="NOME COMPLETO" />
+            <StaticInput placeholder="MATRÍCULA" />
+            <StaticInput placeholder="SELECIONAR CURSO" />
+            <StaticInput placeholder="ANO DE ENTRADA" />
+            <StaticButton>Prosseguir</StaticButton>
           </div>
         </div>
       </div>
