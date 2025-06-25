@@ -3,14 +3,13 @@ import styles from "./page.module.css";
 import React, { useState, useEffect } from "react";
 
 import Input from "@/components/input";
-import StaticInput from "@/components/StaticInput";
-import StaticButton from "@/components/StaticButton";
 import VerticalLine from "@/components/verticalLine";
 import Title from "@/components/title";
 import DefaultButton from "@/components/DefaultButton";
 
-// Força renderização dinâmica
+// Força renderização dinâmica - DESABILITA SSR COMPLETAMENTE
 export const dynamic = "force-dynamic";
+export const runtime = "edge";
 
 export default function AlmostRegistered() {
   const [mounted, setMounted] = useState(false);
@@ -41,41 +40,11 @@ export default function AlmostRegistered() {
     console.log("Form data:", formData);
     // Implementar lógica de envio
   };
-  // Render loading durante SSR
+
+  // LOADING STATE EXTREMAMENTE SIMPLES
   if (!mounted) {
     return (
-      <div className="container-border">
-        <div className={styles.page}>
-          <div className={styles.containerMobile}>
-            <Title title="ESTAMOS QUASE LA" />
-            <StaticInput placeholder="EMAIL" />
-            <StaticInput placeholder="SENHA" type="password" />
-            <StaticInput placeholder="CONFIRMA SENHA" type="password" />
-            <StaticInput placeholder="NOME DE USUÁRIO" />
-            <StaticInput placeholder="NOME COMPLETO" />
-            <StaticInput placeholder="MATRÍCULA" />
-            <StaticInput placeholder="SELECIONAR CURSO" />
-            <StaticInput placeholder="ANO DE ENTRADA" />
-          </div>
-          <div className={styles.rightArea}>
-            <Title title="CADASTRE-SE" />
-            <StaticInput placeholder="EMAIL" />
-            <StaticInput placeholder="SENHA" type="password" />
-            <StaticInput placeholder="CONFIRMA SENHA" type="password" />
-            <StaticInput placeholder="SELECIONAR PERFIL" />
-          </div>
-          <VerticalLine />
-          <div className={styles.leftArea}>
-            <Title title="ESTAMOS QUASE LA" />
-            <StaticInput placeholder="NOME DE USUÁRIO" />
-            <StaticInput placeholder="NOME COMPLETO" />
-            <StaticInput placeholder="MATRÍCULA" />
-            <StaticInput placeholder="SELECIONAR CURSO" />
-            <StaticInput placeholder="ANO DE ENTRADA" />
-            <StaticButton>Prosseguir</StaticButton>
-          </div>
-        </div>
-      </div>
+      <div style={{ padding: "20px", textAlign: "center" }}>Carregando...</div>
     );
   }
   return (
