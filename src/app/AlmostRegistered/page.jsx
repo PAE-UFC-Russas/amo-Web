@@ -1,18 +1,24 @@
 "use client";
 import styles from "./page.module.css";
 import React, { useState, useEffect } from "react";
-
-import Input from "@/components/input";
-import VerticalLine from "@/components/verticalLine";
-import Title from "@/components/title";
-import DefaultButton from "@/components/DefaultButton";
+import dynamicImport from "next/dynamic";
 
 // Força renderização dinâmica - DESABILITA SSR COMPLETAMENTE
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
+// Carregamento dinâmico dos componentes para evitar SSR
+const Input = dynamicImport(() => import("@/components/input"), { ssr: false });
+const VerticalLine = dynamicImport(() => import("@/components/verticalLine"), {
+  ssr: false,
+});
+const Title = dynamicImport(() => import("@/components/title"), { ssr: false });
+const DefaultButton = dynamicImport(
+  () => import("@/components/DefaultButton"),
+  { ssr: false }
+);
+
 export default function AlmostRegistered() {
-  const [mounted, setMounted] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -25,10 +31,6 @@ export default function AlmostRegistered() {
     profile: "",
   });
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
   const handleInputChange = (field, value) => {
     setFormData((prev) => ({
       ...prev,
@@ -40,11 +42,6 @@ export default function AlmostRegistered() {
     console.log("Form data:", formData);
     // Implementar lógica de envio
   };
-
-  // Renderização COMPLETAMENTE vazia durante SSR
-  if (!mounted) {
-    return null;
-  }
 
   // RENDERIZAÇÃO INTERATIVA - SOMENTE NO CLIENTE
   return (

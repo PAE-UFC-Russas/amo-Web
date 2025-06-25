@@ -20,8 +20,7 @@ const nextConfig = {
         ],
       },
     ];
-  },
-  // Configuração para desenvolvimento com proxy reverso
+  }, // Configuração para desenvolvimento com proxy reverso
   async rewrites() {
     return [
       {
