@@ -1,3 +1,4 @@
+"use client";
 import styles from "./styles.module.css";
 
 export default function Input({ placeholder, value, onChange, type = "text" }) {
