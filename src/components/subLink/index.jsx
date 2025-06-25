@@ -1,4 +1,4 @@
-export default function SubLink({ subtitle }) {
+export default function SubLink({ subtitle, onClick }) {
   return (
     <p
       style={{
@@ -6,6 +6,7 @@ export default function SubLink({ subtitle }) {
         textDecoration: "underline",
         cursor: "pointer",
       }}
+      onClick={onClick}
     >
       {subtitle}
     </p>
