@@ -3,3 +3,9 @@
   margin: 100px 0px 100px 0px;
   background-color: white;
 }
+
+@media (max-width: 768px) {
+  .verticalLine {
+    display: none;
+  }
+}

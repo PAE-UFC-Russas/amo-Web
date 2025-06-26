@@ -1,7 +1,11 @@
 * {
   margin: 0;
-  bottom: 0;
+  padding: 0;
   box-sizing: border-box;
+}
+
+html {
+  height: 100%;
 }
 
 body {
@@ -20,6 +24,11 @@ body.no-scroll {
   width: 100vw;
   padding: 50px 100px 50px 100px;
   background-color: white;
+}
+@media (max-width: 1024px) {
+  .container-border {
+    padding: 0px 0px 0px 0px;
+  }
 }
 
 @media (max-width: 768px) {

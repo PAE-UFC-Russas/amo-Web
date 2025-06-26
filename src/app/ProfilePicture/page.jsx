@@ -1,5 +1,7 @@
+"use client";
 import styles from "./page.module.css";
 import Image from "next/image";
+import { useState } from "react";
 
 import Input from "@/components/input";
 import VerticalLine from "@/components/verticalLine";
@@ -9,16 +11,51 @@ import DefaultButton from "@/components/DefaultButton";
 import Foto from "../../../assets/perfil.png";
 
 export default function ProfilePicture() {
+  const [formData, setFormData] = useState({
+    username: "",
+    fullName: "",
+    registration: "",
+    course: "",
+    yearOfEntry: "",
+  });
+
+  const handleInputChange = (field, value) => {
+    setFormData((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
+
   return (
     <div className="container-border">
       <div className={styles.page}>
         <div className={styles.rightArea}>
           <Title title="ESTAMOS QUASE LA" />
-          <Input placeholder="NOME DE USUARIO" />
-          <Input placeholder="NOME COMPLETO" />
-          <Input placeholder="MATRICULA" />
-          <Input placeholder="SELECIONAR O CURSO" />
-          <Input placeholder="ANO DE ENTRADA" />
+          <Input
+            placeholder="NOME DE USUARIO"
+            value={formData.username}
+            onChange={(value) => handleInputChange("username", value)}
+          />
+          <Input
+            placeholder="NOME COMPLETO"
+            value={formData.fullName}
+            onChange={(value) => handleInputChange("fullName", value)}
+          />
+          <Input
+            placeholder="MATRICULA"
+            value={formData.registration}
+            onChange={(value) => handleInputChange("registration", value)}
+          />
+          <Input
+            placeholder="SELECIONAR O CURSO"
+            value={formData.course}
+            onChange={(value) => handleInputChange("course", value)}
+          />
+          <Input
+            placeholder="ANO DE ENTRADA"
+            value={formData.yearOfEntry}
+            onChange={(value) => handleInputChange("yearOfEntry", value)}
+          />
         </div>
 
         <VerticalLine />
@@ -26,7 +63,7 @@ export default function ProfilePicture() {
         <div className={styles.leftArea}>
           <Title title="SELECIONE SUA FOTO DE PERFIL" />
           <Image
-            style={{ height: 200, width: 200 }}
+            className={styles.profileImage}
             src={Foto}
             alt="Logo"
             crossOrigin="anonymous"

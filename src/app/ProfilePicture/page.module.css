@@ -9,16 +9,24 @@
 
 .leftArea {
   align-items: center;
-  gap: 20px;
+  gap: 10px;
   padding: 6% 150px 0px 150px;
   width: 50%;
   display: flex;
   flex-direction: column;
 }
+.profileImage {
+  height: auto;
+  width: 100%;
+  max-width: 180px;
+  max-height: 180px;
+  object-fit: cover;
+  border-radius: 50%;
+}
 
 .rightArea {
   padding: 6% 100px 0px 100px;
-  gap: 20px;
+  gap: 10px;
   text-align: center;
   width: 50%;
   display: flex;
@@ -29,16 +37,26 @@
   .page {
     background: linear-gradient(to bottom, #024284, #2481b6, #52d6fb);
     align-items: center;
-    border-radius: 30px;
+    border-radius: 1px;
   }
 
   .leftArea {
+    width: 40%;
+    padding: 5%;
+  }
+
+  .profileImage {
+    height: auto;
     width: 100%;
-    padding: 10%;
+    max-width: 120px;
+    max-height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
   }
 
   .rightArea {
-    display: none;
+    width: 60%;
+    padding: 5%;
   }
 }
 
