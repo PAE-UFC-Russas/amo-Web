@@ -1,7 +1,8 @@
 "use client";
 import styles from "./page.module.css";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 import Input from "@/components/input";
 import VerticalLine from "@/components/verticalLine";
@@ -9,18 +10,93 @@ import Title from "@/components/title";
 import SubLink from "@/components/subLink";
 import DefaultButton from "@/components/DefaultButton";
 import Foto from "../../../assets/perfil.png";
+import { useAuth } from "@/context/auth";
+import api from "@/service/api";
+import { API_ENDPOINTS } from "@/constants/endpoints";
+import { GetLoginToken } from "@/util/StorageLogin";
 
 export default function ProfilePicture() {
-  const [formData, setFormData] = useState({
-    username: "",
-    fullName: "",
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const [keyboardIsOpen, setKeyboardIsOpen] = useState(false);
+  const [courses, setCourses] = useState([]);
+  const [years, setYears] = useState([]);
+  const [personalData, setPersonalData] = useState({
+    name: "",
+    nickName: "",
     registration: "",
-    course: "",
-    yearOfEntry: "",
+    entryYear: "",
+    course: {
+      id: null,
+      nome: "",
+    },
+  });
+  const [inputErros, setInputErros] = useState({
+    errosNickName: null,
+    errosName: null,
+    errosRegistration: null,
+    errosEntryear: null,
+    errosCourse: null,
+    responseErros: null,
   });
 
+  const { CompleteRegister } = useAuth();
+
+  const InputValidation = async () => {
+    setLoading(true);
+    let erros = {
+      errosName: null,
+      errosNickName: null,
+      errosEntryear: null,
+      errosCourse: null,
+      responseErros: null,
+      errosRegistration: null,
+    };
+
+    if (personalData.name.trim().length < 3) {
+      erros.errosName = "Nome inválido!";
+    }
+    if (
+      !/^[0-9]+$/.test(personalData.registration.trim()) ||
+      personalData.registration.length < 6 ||
+      personalData.registration.length > 7
+    ) {
+      erros.errosRegistration = "Matrícula inválida!";
+    }
+    if (!personalData.nickName.trim()) {
+      erros.errosNickName = "Nome de exibição inválido!";
+    }
+    if (!personalData.entryYear.trim()) {
+      erros.errosEntryear = "Ano de entrada não pode está vazio!";
+    }
+    if (!personalData.course.id) {
+      erros.errosCourse = "Curso não pode está vazio!";
+    }
+
+    setInputErros(erros);
+    if (
+      !erros.errosUser &&
+      !erros.errosName &&
+      !erros.errosNickName &&
+      !erros.errosEntryear &&
+      !erros.errosCourse &&
+      !erros.errosRegistration
+    ) {
+      const response = await CompleteRegister(personalData);
+
+      if (response === personalData.nickName) {
+        router.push("/SelectMonitoring");
+      } else {
+        setInputErros({ ...erros, responseErros: response });
+      }
+    }
+
+    setLoading(false);
+    return null;
+  };
+
   const handleInputChange = (field, value) => {
-    setFormData((prev) => ({
+    setPersonalData((prev) => ({
       ...prev,
       [field]: value,
     }));
@@ -33,28 +109,45 @@ export default function ProfilePicture() {
           <Title title="ESTAMOS QUASE LA" />
           <Input
             placeholder="NOME DE USUARIO"
-            value={formData.username}
-            onChange={(value) => handleInputChange("username", value)}
+            value={personalData.nickName}
+            onChange={(value) => handleInputChange("nickName", value)}
+            error={inputErros.errosNickName}
           />
           <Input
             placeholder="NOME COMPLETO"
-            value={formData.fullName}
-            onChange={(value) => handleInputChange("fullName", value)}
+            value={personalData.name}
+            onChange={(value) => handleInputChange("name", value)}
+            error={inputErros.errosName}
           />
           <Input
             placeholder="MATRICULA"
-            value={formData.registration}
+            value={personalData.registration}
             onChange={(value) => handleInputChange("registration", value)}
-          />
-          <Input
-            placeholder="SELECIONAR O CURSO"
-            value={formData.course}
-            onChange={(value) => handleInputChange("course", value)}
+            error={inputErros.errosRegistration}
           />
           <Input
             placeholder="ANO DE ENTRADA"
-            value={formData.yearOfEntry}
-            onChange={(value) => handleInputChange("yearOfEntry", value)}
+            value={personalData.entryYear}
+            onChange={(value) => handleInputChange("entryYear", value)}
+            error={inputErros.errosEntryear}
+          />
+          <Input
+            placeholder="SELECIONAR O CURSO"
+            items={courses}
+            value={personalData.course.nome}
+            onChange={(value) => {
+              console.log("Curso selecionado:", value);
+              console.log("Lista de cursos disponíveis:", courses);
+              // Encontra o curso selecionado pelo nome
+              const selectedCourse = courses.find(
+                (course) => course.nome === value
+              );
+              console.log("Curso encontrado:", selectedCourse);
+              if (selectedCourse) {
+                handleInputChange("course", selectedCourse);
+              }
+            }}
+            error={inputErros.errosCourse}
           />
         </div>
 
@@ -71,7 +164,7 @@ export default function ProfilePicture() {
 
           <SubLink subtitle="PULAR ETAPA" />
 
-          <DefaultButton children="Prosseguir" />
+          <DefaultButton children="Prosseguir" onClick={InputValidation} />
         </div>
       </div>
     </div>

@@ -17,31 +17,10 @@
   justify-content: center;
 }
 
-.codeInput::placeholder {
-  color: white;
-  opacity: 1;
-}
-
-.codeInput {
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  width: 70px;
-  height: 70px;
-  outline: none;
-  padding: 3%;
-  border-radius: 10px;
-  border: 3px solid white;
-  background-color: transparent;
-  color: white;
-  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
-  transition: box-shadow 0.1s ease;
-}
-
-.codeInput[type="number"]::-webkit-inner-spin-button,
-.codeInput[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+.inputCode {
+  width: 60px;
+  height: 60px;
+  color: black;
 }
 
 /* Para Firefox */
