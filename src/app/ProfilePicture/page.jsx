@@ -42,6 +42,40 @@ export default function ProfilePicture() {
 
   const { CompleteRegister } = useAuth();
 
+  useEffect(() => {
+    const currentYear = new Date().getFullYear();
+    let tempYears = [];
+    for (let i = 2015; i <= currentYear; i++) {
+      tempYears.push(i);
+    }
+    setYears(tempYears);
+
+    async function GetCourses() {
+      try {
+        const response = await api.get("/cursos/", {
+          headers: {
+            Authorization: "Token " + (await GetLoginToken()),
+          },
+        });
+        const listCourses = response.data.results;
+
+        setCourses(listCourses);
+      } catch (error) {
+        console.log(error.response.data);
+      }
+    }
+    GetCourses();
+  }, []);
+
+  const GetYearsPerSemester = () => {
+    let tempYears = [];
+    for (let i = 0; i < years.length; i++) {
+      tempYears.push(years[i] + ".1");
+      tempYears.push(years[i] + ".2");
+    }
+    return tempYears;
+  };
+
   const InputValidation = async () => {
     setLoading(true);
     let erros = {
