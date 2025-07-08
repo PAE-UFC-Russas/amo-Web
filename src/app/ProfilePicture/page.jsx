@@ -67,15 +67,6 @@ export default function ProfilePicture() {
     GetCourses();
   }, []);
 
-  const GetYearsPerSemester = () => {
-    let tempYears = [];
-    for (let i = 0; i < years.length; i++) {
-      tempYears.push(years[i] + ".1");
-      tempYears.push(years[i] + ".2");
-    }
-    return tempYears;
-  };
-
   const InputValidation = async () => {
     setLoading(true);
     let erros = {
@@ -117,9 +108,10 @@ export default function ProfilePicture() {
       !erros.errosRegistration
     ) {
       const response = await CompleteRegister(personalData);
-
+      console.log("Cadastro completo com sucesso!", response);
       if (response === personalData.nickName) {
-        router.push("/SelectMonitoring");
+        router.push("/RegistrationCompleted");
+        console.log("Cadastro completo com sucesso!");
       } else {
         setInputErros({ ...erros, responseErros: response });
       }

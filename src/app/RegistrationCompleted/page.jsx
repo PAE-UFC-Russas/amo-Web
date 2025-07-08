@@ -1,15 +1,26 @@
+"use client";
 import Image from "next/image";
 import styles from "./page.module.css";
 import Foto from "../../../assets/perfil.png";
 import Title from "@/components/title";
 import DefaultButton from "@/components/DefaultButton";
+import { useAuth } from "@/context/auth";
+import { useRouter } from "next/navigation";
 
 export default function RegistrationCompleted() {
+  const router = useRouter();
+  const { user } = useAuth();
+  console.log("User data:", user);
+
+  function RedirectionLogin() {
+    // Redirecionar para a página de login
+    router.push("/");
+  }
   return (
     <div className="container-border">
       <div className={styles.container}>
         <div className={styles.subContent}>
-          <Title title="SEJA BEM VINDO XXXXX" />
+          <Title title={`SEJA BEM VINDO ${user?.nome_completo || "Usuário"}`} />
 
           <section className={styles.layoutImg}>
             <div className={styles.leftArea}>
@@ -36,7 +47,10 @@ export default function RegistrationCompleted() {
             </div>
           </section>
           <section className={styles.layoutButton}>
-            <DefaultButton children="CONCLUIR CADASTRO" />
+            <DefaultButton
+              children="CONCLUIR CADASTRO"
+              onClick={RedirectionLogin}
+            />
           </section>
         </div>
       </div>

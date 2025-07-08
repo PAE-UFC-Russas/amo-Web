@@ -12,6 +12,17 @@
   overflow-x: hidden; /* Evita que o conteúdo vaze durante a transição */
 }
 
+.sidebarContent {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.sidebarTop {
+  flex-grow: 1;
+}
+
 .logo {
   margin-bottom: 30px; /* Adiciona espaço abaixo do logo */
 }
@@ -136,5 +147,64 @@
   .sidebar.mobile :global(.menuItem) {
     padding: 12px 15px;
     font-size: 0.9em;
+  }
+}
+
+/* Estilos para o botão de logout */
+.logoutContainer {
+  margin-top: auto; /* Empurra o botão para o final da sidebar */
+  width: 100%;
+  padding: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.logoutButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 15px 20px;
+  background-color: #d32f2f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.9em;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.logoutButton:hover {
+  background-color: #b71c1c;
+  transform: translateY(-2px);
+}
+
+.logoutButton:active {
+  transform: translateY(0);
+}
+
+.logoutIcon {
+  font-size: 1.1em;
+}
+
+.logoutText {
+  font-size: 0.9em;
+  letter-spacing: 0.5px;
+}
+
+/* Responsividade para mobile */
+@media (max-width: 768px) {
+  .sidebar.mobile .logoutContainer {
+    padding: 15px;
+  }
+
+  .sidebar.mobile .logoutButton {
+    padding: 12px 15px;
+    font-size: 0.8em;
+  }
+
+  .sidebar.mobile .logoutIcon {
+    font-size: 1em;
   }
 }

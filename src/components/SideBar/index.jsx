@@ -2,8 +2,9 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+import { usePathname, useRouter } from "next/navigation";
+import { FaChevronDown, FaChevronUp, FaSignOutAlt } from "react-icons/fa";
+import { useAuth } from "@/context/auth";
 import styles from "./styles.module.css";
 
 import Logo from "../../../assets/logoSadebar.png";
@@ -19,6 +20,18 @@ export default function SideBar() {
   const [isOpen, setIsOpen] = useState(false); // Controla se o menu mobile está aberto ou fechado
   const [isMobileView, setIsMobileView] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
+  const { Logout } = useAuth();
+
+  // Função para fazer logout
+  const handleLogout = async () => {
+    try {
+      await Logout();
+      router.push("/"); // Redireciona para a página de login
+    } catch (error) {
+      console.error("Erro ao fazer logout:", error);
+    }
+  };
 
   // Função para alternar o estado do menu mobile
   const toggleMenu = () => {
@@ -66,32 +79,46 @@ export default function SideBar() {
         </div>
       )}
       <div className={contentClasses.join(" ")}>
-        <div className={styles.logo}>
-          <Image
-            style={{ height: 150, width: 170 }}
-            src={Logo}
-            alt="Logo"
-            crossOrigin="anonymous"
-          />
-        </div>
-        <ul className={styles.menu}>
-          {menuItems.map((item) => (
-            <Link
-              style={{ textDecoration: "none", color: "white" }}
-              key={item.label}
-              href={item.path}
-              passHref
-            >
-              <li
-                className={`${styles.menuItem} ${
-                  pathname === item.path ? styles.active : ""
-                }`}
+        <div className={styles.sidebarTop}>
+          <div className={styles.logo}>
+            <Image
+              style={{ height: 150, width: 170 }}
+              src={Logo}
+              alt="Logo"
+              crossOrigin="anonymous"
+            />
+          </div>
+          <ul className={styles.menu}>
+            {menuItems.map((item) => (
+              <Link
+                style={{ textDecoration: "none", color: "white" }}
+                key={item.label}
+                href={item.path}
+                passHref
               >
-                {item.label}
-              </li>
-            </Link>
-          ))}
-        </ul>
+                <li
+                  className={`${styles.menuItem} ${
+                    pathname === item.path ? styles.active : ""
+                  }`}
+                >
+                  {item.label}
+                </li>
+              </Link>
+            ))}
+          </ul>
+        </div>
+
+        {/* Botão de Logout */}
+        <div className={styles.logoutContainer}>
+          <button
+            className={styles.logoutButton}
+            onClick={handleLogout}
+            title="Fazer Logout"
+          >
+            <FaSignOutAlt className={styles.logoutIcon} />
+            <span className={styles.logoutText}>SAIR</span>
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -111,8 +111,8 @@ export default function AuthContextProvider({ children }) {
         curso: userData.course.id,
         foto: foto,
       });
-
-      return response.data.nome_exibicao;
+      console.log("Dados do usuário atualizados:", response.data);
+      return response.data.perfil.nome_exibicao;
     } catch (error) {
       console.log(error);
       return error.response?.data;

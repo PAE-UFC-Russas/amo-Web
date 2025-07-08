@@ -2,7 +2,7 @@
 
 import "./page.css";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "@/context/auth";
 
 import Input from "@/components/input";
@@ -14,14 +14,62 @@ import DefaultButton from "@/components/DefaultButton";
 
 export default function Home() {
   const router = useRouter();
-  const { Login } = useAuth();
+  const { Login, IsConnected } = useAuth();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [checkingAuth, setCheckingAuth] = useState(true);
+  const [hasCheckedAuth, setHasCheckedAuth] = useState(false);
 
   const [userLogin, setUserLogin] = useState({
     email: "",
     password: "",
   });
+
+  // Verificar se o usuário já está logado
+  useEffect(() => {
+    const checkUserAuth = async () => {
+      // Evitar múltiplas verificações
+      if (hasCheckedAuth) return;
+
+      try {
+        console.log("🔍 Verificando autenticação...");
+
+        // Timeout para evitar travamento
+        const timeoutPromise = new Promise((_, reject) =>
+          setTimeout(() => reject(new Error("Timeout")), 5000)
+        );
+
+        const isConnected = await Promise.race([IsConnected(), timeoutPromise]);
+
+        console.log("📊 Status de conexão:", isConnected);
+
+        if (isConnected === true) {
+          // Usuário está logado e com perfil completo
+          console.log(
+            "✅ Usuário logado, redirecionando para SelectDiscipline"
+          );
+          router.replace("/SelectDiscipline");
+          return;
+        } else if (isConnected === null) {
+          // Usuário está logado mas com perfil incompleto
+          console.log(
+            "⚠️ Perfil incompleto, redirecionando para CompleteRegister"
+          );
+          router.replace("/CompleteRegister");
+          return;
+        }
+        // Se isConnected === false, usuário não está logado, continua na página de login
+        console.log("❌ Usuário não logado, permanecendo na tela de login");
+      } catch (error) {
+        console.error("❌ Erro ao verificar autenticação:", error);
+      } finally {
+        setHasCheckedAuth(true);
+        setCheckingAuth(false);
+      }
+    };
+
+    checkUserAuth();
+  }, [router, hasCheckedAuth]);
 
   const handleRegisterClick = () => {
     console.log("Navegando para a página de registro...");
@@ -65,7 +113,7 @@ export default function Home() {
         router.push("/CompleteRegister");
       } else {
         console.log("✅ Login realizado com sucesso!");
-        router.push("/SelectMonitoring"); // ou a página principal após login
+        router.push("/SelectDiscipline"); // Redireciona para SelectDiscipline após login bem-sucedido
       }
     } catch (err) {
       console.error("Erro durante o login:", err);
@@ -74,6 +122,28 @@ export default function Home() {
       setLoading(false);
     }
   };
+
+  // Mostrar loading enquanto verifica autenticação
+  if (checkingAuth) {
+    return (
+      <div className="container-border">
+        <div className="page">
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100vh",
+              fontSize: "18px",
+            }}
+          >
+            Verificando autenticação...
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="container-border">
       <div className="page">

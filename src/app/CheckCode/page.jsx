@@ -28,26 +28,6 @@ export default function CheckCode() {
     return () => clearInterval(timerId);
   }, []);
 
-  const resendToken = async () => {
-    if (timeToken === 0) {
-      try {
-        const isRegister = searchParams.get("register");
-        const email = searchParams.get("email");
-
-        if (isRegister) {
-          await Register({ email: user.email, password: user.password });
-        } else if (email) {
-          await sendRecoverPassword();
-        }
-      } catch (error) {
-        console.log(error);
-        setError("Erro ao enviar o código, tente novamente mais tarde.");
-      } finally {
-        setTimeToken(60);
-      }
-    }
-  };
-
   const TextResendToken = () => {
     if (timeToken > 0) {
       return `Aguarde ${timeToken} segundos para receber o código novamente.`;
@@ -85,28 +65,9 @@ export default function CheckCode() {
 
     if (inputIsFilled > 0) {
       const activeToken = code.toString().replace(/,/g, "");
-      const isRegister = searchParams.get("register");
 
-      if (isRegister) {
-        const codeActivationMessage = await Active(activeToken);
-
-        if (codeActivationMessage === true) {
-          router.push("/ProfilePicture");
-        } else {
-          setError(codeActivationMessage);
-        }
-      } else {
-        try {
-          await api.post("/usuario/verificar-token/", {
-            token: activeToken,
-          });
-          router.push("/ProfilePicture");
-          console.log(COURSES);
-        } catch (error) {
-          console.log(error.response);
-          setError("Token inválido!");
-        }
-      }
+      await Active(activeToken);
+      router.push("/ProfilePicture");
     } else {
       setError("O campo do código não pode estar vazio!");
     }
