@@ -40,19 +40,46 @@ export default function SelectMonitoring() {
     <div className="container-border">
       <div className={styles.page}>
         <div className={styles.rightArea}>
-          <Title title="SELECIONE O CURSO QUE A MONITORIA PERTENCE:" />
+          <div className={styles.headerSection}>
+            <Title title="SELECIONE A MONITORIA DESEJADA:" />
+            {course && (
+              <div className={styles.courseInfo}>
+                <div className={styles.courseInfoText}>
+                  Curso: {course.nome}
+                </div>
+              </div>
+            )}
+            {!loading && subjects.length > 0 && (
+              <div className={styles.subjectCount}>
+                {subjects.length} monitoria{subjects.length !== 1 ? "s" : ""}{" "}
+                disponível{subjects.length !== 1 ? "eis" : ""}
+              </div>
+            )}
+          </div>
+
           {loading ? (
-            <div>Loading...</div>
+            <div className={styles.loadingContainer}>
+              <div className={styles.loadingSpinner}></div>
+              <div>Carregando monitorias...</div>
+            </div>
+          ) : subjects.length === 0 ? (
+            <div className={styles.loadingContainer}>
+              <div style={{ fontSize: "1.1rem", textAlign: "center" }}>
+                Nenhuma monitoria encontrada para este curso.
+              </div>
+            </div>
           ) : (
-            subjects
-              .sort((a, b) => a.nome.localeCompare(b.nome))
-              .map((item, index) => (
-                <SubjectButton
-                  key={index}
-                  subject={{ name: item.nome }}
-                  onClick={() => handleSubjectSelection(item)}
-                />
-              ))
+            <div className={styles.monitoringContainer}>
+              {subjects
+                .sort((a, b) => a.nome.localeCompare(b.nome))
+                .map((item, index) => (
+                  <SubjectButton
+                    key={index}
+                    subject={{ name: item.nome }}
+                    onClick={() => handleSubjectSelection(item)}
+                  />
+                ))}
+            </div>
           )}
         </div>
       </div>

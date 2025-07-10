@@ -59,6 +59,20 @@ export default function AuthContextProvider({ children }) {
     } catch (error) {
       console.error("❌ Erro no login:", error);
 
+      // Tratamento específico para credenciais inválidas (401)
+      if (error.response?.status === 401) {
+        return {
+          erro: "Email ou senha incorretos. Verifique suas credenciais e tente novamente.",
+        };
+      }
+
+      // Tratamento para outros erros de status HTTP
+      if (error.response?.status === 400) {
+        return {
+          erro: "Dados inválidos. Verifique o email e senha.",
+        };
+      }
+
       // Tratamento específico para erro de CORS
       if (error.isCorsError) {
         return {

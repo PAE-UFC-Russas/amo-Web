@@ -1,68 +1,98 @@
 .subjectButton {
-  min-width: 500px;
+  min-width: 400px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem 1rem;
-  border-radius: 0.8rem;
-  background-color: #00495e;
+  padding: 1.2rem 2rem;
+  border-radius: 1rem;
+  background: linear-gradient(145deg, #00495e, #005f78);
   color: white;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   text-decoration: none;
   cursor: pointer;
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
 
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(0);
+}
+
+.subjectButton::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s;
 }
 
 .subjectButton:hover {
-  width: 510px;
-  padding: 1.1rem 1.2rem;
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  background: linear-gradient(145deg, #005f78, #007a9a);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.subjectButton:hover::before {
+  left: 100%;
+}
+
+.subjectButton:active {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .subjectButtonContent {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: bold;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
 }
 
 @media (max-width: 1024px) {
   .subjectButton {
-    min-width: 400px;
-    padding: 0.9rem 0.9rem;
-    font-size: 1.2rem;
-  }
-
-  .subjectButton:hover {
-    min-width: 410px;
-    padding: 1rem 1rem;
+    min-width: 350px;
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
   }
 }
 
 @media (max-width: 768px) {
   .subjectButton {
     min-width: 300px;
-    padding: 0.8rem 0.8rem;
-    font-size: 1.1rem;
-  }
-
-  .subjectButton:hover {
-    min-width: 310px;
-    padding: 0.9rem 0.9rem;
+    padding: 1rem 1.2rem;
+    font-size: 1rem;
   }
 }
 
 @media (max-width: 480px) {
   .subjectButton {
-    min-width: 100%; /* Ocupa toda a largura disponível */
-    padding: 0.7rem 0.7rem;
-    font-size: 1rem;
+    min-width: 100%;
+    max-width: 100%;
+    padding: 1rem;
+    font-size: 0.95rem;
+    margin: 0;
   }
 
-  .subjectButton:hover {
-    min-width: 100%; /* Mantém largura total */
-    padding: 0.8rem 0.8rem;
+  .subjectButtonContent {
+    font-size: 0.9rem;
+    letter-spacing: 0.3px;
   }
 }

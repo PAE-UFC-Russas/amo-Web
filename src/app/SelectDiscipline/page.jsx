@@ -39,19 +39,33 @@ export default function SelectDiscipline() {
     <div className="container-border">
       <div className={styles.page}>
         <div className={styles.rightArea}>
-          <Title title="SELECIONE O CURSO QUE A MONITORIA PERTENCE:" />
+          <div className={styles.headerSection}>
+            <Title title="SELECIONE O CURSO QUE A MONITORIA PERTENCE:" />
+            {!loading && courses.length > 0 && (
+              <div className={styles.courseCount}>
+                {courses.length} curso{courses.length !== 1 ? "s" : ""}{" "}
+                disponível{courses.length !== 1 ? "eis" : ""}
+              </div>
+            )}
+          </div>
+
           {loading ? (
-            <div>Loading...</div>
+            <div className={styles.loadingContainer}>
+              <div className={styles.loadingSpinner}></div>
+              <div>Carregando cursos...</div>
+            </div>
           ) : (
-            courses
-              .sort((a, b) => a.nome.localeCompare(b.nome))
-              .map((item, index) => (
-                <SubjectButton
-                  key={index}
-                  subject={{ name: item.nome }}
-                  onClick={() => handleCourseSelection(item)}
-                />
-              ))
+            <div className={styles.coursesContainer}>
+              {courses
+                .sort((a, b) => a.nome.localeCompare(b.nome))
+                .map((item, index) => (
+                  <SubjectButton
+                    key={index}
+                    subject={{ name: item.nome }}
+                    onClick={() => handleCourseSelection(item)}
+                  />
+                ))}
+            </div>
           )}
         </div>
       </div>

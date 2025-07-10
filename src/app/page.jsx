@@ -103,18 +103,25 @@ export default function Home() {
         password: userLogin.password,
       });
 
+      console.log("🔍 Resultado do login:", result);
+
       if (result?.erro) {
         setError(result.erro);
         console.error("Erro no login:", result.erro);
-      } else if (result === "usuario incompleto!") {
+        return; // Para aqui se houver erro
+      }
+
+      if (result && result.erro === "usuario incompleto!") {
         console.log(
           "✅ Login realizado! Redirecionando para completar cadastro..."
         );
         router.push("/CompleteRegister");
-      } else {
-        console.log("✅ Login realizado com sucesso!");
-        router.push("/SelectDiscipline"); // Redireciona para SelectDiscipline após login bem-sucedido
+        return;
       }
+
+      // Se chegou até aqui, login foi bem-sucedido
+      console.log("✅ Login realizado com sucesso!");
+      router.push("/SelectDiscipline");
     } catch (err) {
       console.error("Erro durante o login:", err);
       setError("Erro ao fazer login. Tente novamente.");

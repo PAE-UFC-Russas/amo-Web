@@ -1,35 +1,151 @@
 .page {
   display: flex;
-  background: linear-gradient(to bottom, #024284, #2481b6, #52d6fb);
+  background: linear-gradient(135deg, #024284, #2481b6, #52d6fb);
   height: 100%;
   border-radius: 100px;
   flex-direction: column;
-  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
-  transition: box-shadow 0.1s ease;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-.buttonsArea {
-  margin-top: 6rem;
+.page::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+      circle at 20% 80%,
+      rgba(255, 255, 255, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(255, 255, 255, 0.08) 0%,
+      transparent 50%
+    );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.rightArea {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 2rem;
+  height: 100%;
+  justify-content: flex-start;
+  gap: 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.coursesContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 1200px;
+  padding: 1rem;
+  justify-items: center;
+}
+
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  color: white;
+  font-size: 1.2rem;
   gap: 1rem;
+}
+
+.loadingSpinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.headerSection {
+  text-align: center;
+  padding: 1rem 0;
+  max-width: 800px;
+}
+
+.courseCount {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  font-weight: 500;
 }
 
 @media (max-width: 1024px) {
   .page {
-    background: linear-gradient(to bottom, #024284, #2481b6, #52d6fb);
+    background: linear-gradient(135deg, #024284, #2481b6, #52d6fb);
+    border-radius: 50px;
+  }
+
+  .coursesContainer {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .rightArea {
+    padding: 1.5rem;
+    gap: 1.5rem;
   }
 }
 
 @media (max-width: 768px) {
   .page {
-    background: linear-gradient(to bottom, #024284, #2481b6, #52d6fb);
+    background: linear-gradient(135deg, #024284, #2481b6, #52d6fb);
+    border-radius: 30px;
+  }
+
+  .coursesContainer {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 0.5rem;
+  }
+
+  .rightArea {
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .headerSection {
+    padding: 0.5rem 0;
   }
 }
 
 @media (max-width: 480px) {
   .page {
-    background: linear-gradient(to bottom, #024284, #2481b6, #52d6fb);
+    background: linear-gradient(135deg, #024284, #2481b6, #52d6fb);
+    border-radius: 20px;
+    margin: 0.5rem;
+  }
+
+  .rightArea {
+    padding: 1rem 0.5rem;
+  }
+
+  .coursesContainer {
+    padding: 0;
   }
 }
