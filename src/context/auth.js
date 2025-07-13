@@ -161,6 +161,12 @@ export default function AuthContextProvider({ children }) {
   async function Logout() {
     setUser(null);
     await DeleteLoginToken();
+
+    // Limpar cache de subject e course
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("selected_subject");
+      localStorage.removeItem("selected_course");
+    }
   }
 
   async function IsConnected() {

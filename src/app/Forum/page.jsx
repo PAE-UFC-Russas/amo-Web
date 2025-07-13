@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 // Removido FaSearch e FaUserCircle daqui, pois serão passados como children para ForumHeader
 
@@ -8,14 +8,279 @@ import Card from "@/components/Card";
 import FloatingButton from "@/components/FloatingButton";
 import RegisterDoubt from "@/components/RegisterDoubt";
 import AnswerQuestions from "@/components/AnswerQuestions";
-
+import api from "@/service/api";
+import { useAuth } from "@/context/auth";
+import { useSubject } from "@/context/subject";
+import { GetLoginToken } from "@/util/StorageLogin";
 import ForumHeader from "@/components/ForumHeader"; // Importa o novo componente
 import { FaUserCircle } from "react-icons/fa"; // Mantido para o ícone de perfil, se necessário como fallback ou passado diretamente
-
 import styles from "./page.module.css";
 import perfil from "../../../assets/perfil.png";
 
 export default function Forum() {
+  const [filters, setFilters] = useState({
+    recent: true,
+    responded: false,
+    mostLiked: false,
+    text: "",
+  });
+  const [confirmDeleteQuest, setConfirmDelete] = useState({
+    open: false,
+    id: null,
+  });
+  const [reportQuestion, setReportQuestion] = useState({
+    open: false,
+    id: null,
+    reason: "",
+    description: "",
+  });
+  const [page, setPage] = useState(1);
+  const [displayValue, setDisplayValue] = useState("");
+  const [data, setData] = useState([]);
+  const [originalData, setOriginalData] = useState([]); // Dados originais sem filtro de pesquisa
+  const [loading, setLoading] = useState(true);
+
+  // Função simples para substituir useCustomToast
+  const showToast = (title, message, type) => {
+    console.log(`${type.toUpperCase()}: ${title} - ${message}`);
+    // Aqui você pode implementar uma solução de toast real depois
+    alert(`${title}: ${message}`);
+  };
+
+  const { subject, isLoaded } = useSubject();
+
+  // Função para formatar data no padrão brasileiro
+  const formatDate = (dateString) => {
+    if (!dateString || dateString === "Sem data") return "Sem data";
+
+    try {
+      const date = new Date(dateString);
+      const months = [
+        "janeiro",
+        "fevereiro",
+        "março",
+        "abril",
+        "maio",
+        "junho",
+        "julho",
+        "agosto",
+        "setembro",
+        "outubro",
+        "novembro",
+        "dezembro",
+      ];
+
+      const day = date.getDate().toString().padStart(2, "0");
+      const month = months[date.getMonth()];
+      const year = date.getFullYear();
+
+      return `${day} de ${month} de ${year}`;
+    } catch (error) {
+      return "Data inválida";
+    }
+  };
+
+  const GetQuestions = async (next) => {
+    try {
+      setLoading(true);
+      let url = `/duvidas/?page=${page}&disciplina_id=${subject.id}`;
+
+      if (next && data.next) {
+        url = `/duvidas/?page=${
+          data.next ? data.next.substring(-1) : page + 1
+        }&disciplina_id=${subject.id}`;
+        setPage(page + 1);
+      }
+
+      if (filters.recent) {
+        url += "&ordering=-data";
+      } else if (filters.responded) {
+        url += "&respondida=true";
+      } else if (filters.mostLiked) {
+        url += "&ordering=-votos";
+      }
+
+      const response = await api.get(url, {
+        headers: {
+          Authorization: "Token " + (await GetLoginToken()),
+        },
+      });
+
+      if (next && data.next) {
+        const results = [...originalData.results, ...response.data.results];
+        const newData = { ...response.data, results: results };
+        setOriginalData(newData);
+        setData(newData);
+      } else {
+        setOriginalData(response.data);
+        setData(response.data);
+      }
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const DeleteQuestion = async () => {
+    try {
+      await api.delete(`/duvidas/${confirmDeleteQuest.id}/`, {
+        headers: {
+          Authorization: "Token " + (await GetLoginToken()),
+        },
+      });
+      setConfirmDelete({ open: false, id: null });
+
+      // Remove a dúvida dos dados originais
+      const updatedOriginalResults = originalData.results.filter(
+        (item) => item.id !== confirmDeleteQuest.id
+      );
+      const newOriginalData = {
+        ...originalData,
+        results: updatedOriginalResults,
+      };
+      setOriginalData(newOriginalData);
+
+      // Remove a dúvida dos dados filtrados
+      const updatedFilteredResults = data.results.filter(
+        (item) => item.id !== confirmDeleteQuest.id
+      );
+      setData({ ...data, results: updatedFilteredResults });
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+
+  const handleReportQuestion = async () => {
+    try {
+      if (!reportQuestion.reason) {
+        showToast("Erro", "Selecione um motivo", "warning");
+        return;
+      }
+
+      const report = {
+        reason: reportQuestion.reason,
+        descricao: reportQuestion.description,
+        disciplina: subject.id,
+      };
+
+      await api.post(`/duvidas/${reportQuestion.id}/report-duvida/`, report, {
+        headers: {
+          Authorization: "Token " + (await GetLoginToken()),
+        },
+      });
+
+      setReportQuestion({ open: false, id: null });
+
+      showToast("Sucesso", "Reportado com sucesso!", "success");
+    } catch (error) {
+      showToast("Error", "Tente novamente mais tarde", "erro");
+      console.log(error.response);
+    }
+  };
+
+  const handleLikeButton = (id) => {
+    // Atualiza os dados originais
+    const updatedOriginalResults = originalData.results.map((item) => {
+      if (item.id === id) {
+        const votou = item.votou;
+        const votos = item.votos;
+        return {
+          ...item,
+          votos: votou ? votos - 1 : votos + 1,
+          votou: !votou,
+        };
+      }
+      return item;
+    });
+
+    const newOriginalData = {
+      ...originalData,
+      results: updatedOriginalResults,
+    };
+    setOriginalData(newOriginalData);
+
+    // Atualiza os dados filtrados
+    const updatedFilteredResults = data.results.map((item) => {
+      if (item.id === id) {
+        const votou = item.votou;
+        const votos = item.votos;
+        return {
+          ...item,
+          votos: votou ? votos - 1 : votos + 1,
+          votou: !votou,
+        };
+      }
+      return item;
+    });
+
+    setData({ ...data, results: updatedFilteredResults });
+  };
+
+  const PostLike = async (id) => {
+    try {
+      handleLikeButton(id);
+      await api.post(
+        `/duvidas/${id}/votar/`,
+        {},
+        {
+          headers: {
+            Authorization: "Token " + (await GetLoginToken()),
+          },
+        }
+      );
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+
+  const DeleteLike = async (id) => {
+    try {
+      handleLikeButton(id);
+      await api.delete(`/duvidas/${id}/votar/`, {
+        headers: {
+          Authorization: "Token " + (await GetLoginToken()),
+        },
+      });
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+
+  useEffect(() => {
+    if (isLoaded && subject && subject.id) {
+      if (filters.responded || filters.mostLiked || filters.recent) {
+        GetQuestions();
+      } else {
+        GetQuestions();
+      }
+    }
+  }, [filters.responded, filters.mostLiked, filters.recent, subject, isLoaded]);
+
+  // UseEffect separado para filtrar localmente por texto de pesquisa
+  useEffect(() => {
+    if (!originalData.results) return;
+
+    if (filters.text.length === 0) {
+      // Se não há texto de pesquisa, mostra todos os dados originais
+      setData(originalData);
+    } else {
+      // Filtra localmente baseado no texto de pesquisa
+      const filteredResults = originalData.results.filter(
+        (post) =>
+          post.titulo?.toLowerCase().includes(filters.text.toLowerCase()) ||
+          post.descricao?.toLowerCase().includes(filters.text.toLowerCase()) ||
+          post.autor?.perfil?.nome_exibicao
+            ?.toLowerCase()
+            .includes(filters.text.toLowerCase())
+      );
+
+      setData({
+        ...originalData,
+        results: filteredResults,
+      });
+    }
+  }, [filters.text, originalData]);
+
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [isAnswerModalOpen, setIsAnswerModalOpen] = useState(false);
   const [selectedQuestion, setSelectedQuestion] = useState(null);
@@ -24,8 +289,12 @@ export default function Forum() {
     setIsRegisterModalOpen(true);
   };
 
-  const handleCloseRegisterModal = () => {
+  const handleCloseRegisterModal = (shouldRefresh = false) => {
     setIsRegisterModalOpen(false);
+    if (shouldRefresh) {
+      // Recarregar as dúvidas quando uma nova for criada
+      GetQuestions();
+    }
   };
 
   const handleOpenAnswerModal = (question) => {
@@ -37,83 +306,78 @@ export default function Forum() {
     setIsAnswerModalOpen(false);
     setSelectedQuestion(null);
   };
-  const forumPosts = [
-    {
-      author: "GIOVANA ARAUJO",
-      title: "QUANTIDADE DE MEMBROS DO TRABALHO",
-      description:
-        "O seminário pode ser feito com até quantas pessoas na equipe?",
-      date: "17/04/2024",
-      comments: 7,
-      likes: 3,
-      isResponded: true,
-      avatar: perfil,
-    },
-    {
-      author: "GIOVANA ARAUJO",
-      title: "QUANTIDADE DE MEMBROS DO TRABALHO",
-      description:
-        "O seminário pode ser feito com até quantas pessoas na equipe?",
-      date: "17/04/2024",
-      comments: 7,
-      likes: 3,
-      isResponded: true,
-      avatar: perfil,
-    },
-    {
-      author: "GIOVANA ARAUJO",
-      title: "QUANTIDADE DE MEMBROS DO TRABALHO",
-      description:
-        "O seminário pode ser feito com até quantas pessoas na equipe?",
-      date: "17/04/2024",
-      comments: 7,
-      likes: 3,
-      isResponded: true,
-      avatar: perfil,
-    },
-    {
-      author: "GIOVANA ARAUJO",
-      title: "QUANTIDADE DE MEMBROS DO TRABALHO",
-      description:
-        "O seminário pode ser feito com até quantas pessoas na equipe?",
-      date: "17/04/2024",
-      comments: 7,
-      likes: 3,
-      isResponded: true,
-      avatar: perfil,
-    },
-    {
-      author: "GIOVANA ARAUJO",
-      title: "QUANTIDADE DE MEMBROS DO TRABALHO",
-      description:
-        "O seminário pode ser feito com até quantas pessoas na equipe?",
-      date: "17/04/2024",
-      comments: 7,
-      likes: 3,
-      isResponded: true,
-      avatar: perfil,
-    },
-  ];
+
+  // Função para alternar filtros
+  const handleFilterChange = (filterType) => {
+    setFilters((prev) => {
+      // Primeiro, desativa todos os filtros
+      const newFilters = {
+        recent: false,
+        responded: false,
+        mostLiked: false,
+        text: prev.text, // Mantém o texto de busca
+      };
+
+      // Ativa apenas o filtro selecionado (ou desativa se já estiver ativo)
+      if (!prev[filterType]) {
+        newFilters[filterType] = true;
+      }
+
+      return newFilters;
+    });
+  };
+
+  // Função para alterar texto de busca
+  const handleSearchChange = (searchText) => {
+    setFilters((prev) => ({
+      ...prev,
+      text: searchText,
+    }));
+  };
+
   return (
     <div className={styles.container}>
       <Sidebar />
       <div className={styles.mainContent}>
-        <ForumHeader />{" "}
+        <ForumHeader
+          filters={filters}
+          onFilterChange={handleFilterChange}
+          searchValue={filters.text}
+          onSearchChange={handleSearchChange}
+        />{" "}
         <div className={styles.postsGrid}>
-          {forumPosts.map((post, index) => (
-            <Card
-              key={index}
-              author={post.author}
-              title={post.title}
-              description={post.description}
-              date={post.date}
-              comments={post.comments}
-              likes={post.likes}
-              isResponded={post.isResponded}
-              avatar={post.avatar}
-              onClick={() => handleOpenAnswerModal(post)}
-            />
-          ))}
+          {data.results && data.results.length > 0 ? (
+            data.results.map((post, index) => (
+              <Card
+                key={post.id || index}
+                author={post.autor.perfil.nome_exibicao || "Autor Desconhecido"}
+                title={post.titulo || "Sem título"}
+                description={post.descricao || "Sem descrição"}
+                date={formatDate(post.data)}
+                comments={post.comentarios?.length || 0}
+                likes={post.votos || 0}
+                isResponded={post.respondida || false}
+                avatar={post.avatar || perfil}
+                onClick={() => handleOpenAnswerModal(post)}
+                onLike={post.votou ? DeleteLike : PostLike}
+                postId={post.id}
+                isLiked={post.votou || false}
+              />
+            ))
+          ) : (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                minHeight: "200px",
+                color: "#666",
+                fontSize: "16px",
+              }}
+            >
+              {loading ? "Carregando posts..." : "Nenhuma dúvida encontrada"}
+            </div>
+          )}
         </div>
         <FloatingButton onClick={handleOpenRegisterModal} />
         <RegisterDoubt

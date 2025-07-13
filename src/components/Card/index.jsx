@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image"; // Adicionado para a imagem de perfil
 import styles from "./styles.module.css";
 
-import { FaRegThumbsUp, FaRegCommentDots } from "react-icons/fa"; // Ícones atualizados
+import { FaRegThumbsUp, FaRegCommentDots, FaThumbsUp } from "react-icons/fa"; // Ícones atualizados
 
 import HorizontaLine from "../HorizontalLine";
 
@@ -16,14 +16,17 @@ export default function Card({
   isResponded,
   avatar,
   onClick,
+  onLike,
+  postId,
+  isLiked,
 }) {
   return (
-    <div
-      className={`${styles.card} ${isResponded ? styles.responded : ""}`}
-      onClick={onClick}
-      style={{ cursor: onClick ? "pointer" : "default" }}
-    >
-      <div className={styles.cardHeader}>
+    <div className={`${styles.card} ${isResponded ? styles.responded : ""}`}>
+      <div
+        onClick={onClick}
+        style={{ cursor: onClick ? "pointer" : "default" }}
+        className={styles.cardHeader}
+      >
         {avatar ? (
           <Image
             src={avatar}
@@ -42,7 +45,11 @@ export default function Card({
           )}
         </div>
       </div>
-      <div className={styles.cardBody}>
+      <div
+        onClick={onClick}
+        style={{ cursor: onClick ? "pointer" : "default" }}
+        className={styles.cardBody}
+      >
         {title && <h3>{title}</h3>}
         <HorizontaLine height="2px" color="#52D6FB" />
         <p>{description}</p>
@@ -51,12 +58,31 @@ export default function Card({
       <div className={styles.cardFooter}>
         <span>{date}</span>
         <div className={styles.interactions}>
-          <span style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+          <span
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "5px",
+              cursor: "pointer",
+            }}
+            onClick={(e) => {
+              e.stopPropagation();
+              if (onLike && postId) {
+                onLike(postId);
+              }
+            }}
+          >
             {likes}
-            <FaRegThumbsUp size={17} cursor={"pointer"} />{" "}
-            {/* Ícone de curtida */}
+            {isLiked ? (
+              <FaThumbsUp size={17} color="#52D6FB" />
+            ) : (
+              <FaRegThumbsUp size={17} />
+            )}
           </span>
-          <span style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+          <span
+            onClick={onClick}
+            style={{ display: "flex", alignItems: "center", gap: "5px" }}
+          >
             {comments}
             <FaRegCommentDots size={17} cursor={"pointer"} />{" "}
             {/* Ícone de comentários */}

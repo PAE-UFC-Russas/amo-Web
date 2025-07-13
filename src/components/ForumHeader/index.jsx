@@ -13,8 +13,13 @@ const FilterButton = ({ label, isActive, onClick }) => (
   </button>
 );
 
-export default function ForumHeader({ children }) {
-  const [activeFilter, setActiveFilter] = useState("Todos");
+export default function ForumHeader({
+  children,
+  filters: filterState,
+  onFilterChange,
+  searchValue,
+  onSearchChange,
+}) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -65,7 +70,11 @@ export default function ForumHeader({ children }) {
           // Fallback ou renderização condicional se searchBar não for encontrado
           <div className={styles.searchBar}>
             <FaSearch className={styles.searchIcon} />
-            <input placeholder="PESQUISAR DÚVIDAS..." />
+            <input
+              placeholder="PESQUISAR DÚVIDAS..."
+              value={searchValue || ""}
+              onChange={(e) => onSearchChange && onSearchChange(e.target.value)}
+            />
           </div>
         )}
       </div>
@@ -89,19 +98,19 @@ export default function ForumHeader({ children }) {
             // Fallback ou renderização condicional se filters não forem encontrados
             <>
               <FilterButton
-                label="Todos"
-                isActive={activeFilter === "Respondidas"}
-                onClick={() => setActiveFilter("Respondidas")}
+                label="Respondidas"
+                isActive={filterState?.responded || false}
+                onClick={() => onFilterChange && onFilterChange("responded")}
               />
               <FilterButton
-                label="Aguardando"
-                isActive={activeFilter === "Mais Curtidas"}
-                onClick={() => setActiveFilter("Mais Curtidas")}
+                label="Mais Curtidas"
+                isActive={filterState?.mostLiked || false}
+                onClick={() => onFilterChange && onFilterChange("mostLiked")}
               />
               <FilterButton
-                label="Confirmados"
-                isActive={activeFilter === "Recentes"}
-                onClick={() => setActiveFilter("Recentes")}
+                label="Recentes"
+                isActive={filterState?.recent || false}
+                onClick={() => onFilterChange && onFilterChange("recent")}
               />
             </>
           )}
