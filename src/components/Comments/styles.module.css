@@ -1,0 +1,162 @@
+.container {
+  background-color: #f5f5f5;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+  border: 1px solid #e0e0e0;
+  transition: box-shadow 0.2s ease;
+}
+
+.container:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.authorInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.avatarPlaceholder {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+}
+
+.authorDetails {
+  display: flex;
+  flex-direction: column;
+}
+
+.authorName {
+  font-weight: 600;
+  font-size: 14px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.verifiedBadge {
+  color: #333;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.menuButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: #666;
+  transition: background-color 0.2s;
+}
+
+.menuButton:hover {
+  background-color: #e0e0e0;
+}
+
+.content {
+  margin: 12px 0;
+  line-height: 1.5;
+}
+
+.content p {
+  margin: 0;
+  font-size: 14px;
+  color: #333;
+  word-wrap: break-word;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.date {
+  font-size: 12px;
+  color: #666;
+}
+
+.likes {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.likeCount {
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+}
+
+.likeButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 4px;
+  color: #666;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.likeButton:hover {
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
+
+.likeButton.liked {
+  color: #1976d2;
+}
+
+.likeButton.liked:hover {
+  background-color: #e3f2fd;
+}
+
+/* Responsividade para mobile */
+@media (max-width: 768px) {
+  .container {
+    padding: 12px;
+    margin-bottom: 8px;
+  }
+
+  .authorName {
+    font-size: 13px;
+  }
+
+  .content p {
+    font-size: 13px;
+  }
+
+  .date {
+    font-size: 11px;
+  }
+
+  .likeCount {
+    font-size: 13px;
+  }
+}

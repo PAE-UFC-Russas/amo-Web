@@ -335,6 +335,13 @@ export default function Forum() {
     }));
   };
 
+  // Função para lidar com o clique no menu de 3 pontos
+  const handleMenuClick = (postId) => {
+    console.log("Menu clicado para o post:", postId);
+    // Aqui você pode implementar um menu dropdown ou modal
+    // Por exemplo: abrir menu com opções: Editar, Deletar, Reportar, etc.
+  };
+
   return (
     <div className={styles.container}>
       <Sidebar />
@@ -362,6 +369,7 @@ export default function Forum() {
                 onLike={post.votou ? DeleteLike : PostLike}
                 postId={post.id}
                 isLiked={post.votou || false}
+                onMenuClick={handleMenuClick}
               />
             ))
           ) : (

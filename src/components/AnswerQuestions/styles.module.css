@@ -390,3 +390,23 @@
     font-size: 13px;
   }
 }
+
+/* Estilos para a seção de comentários */
+.commentsSection {
+  padding: 20px;
+  border-top: 1px solid #e0e0e0;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.noComments {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  padding: 20px 0;
+}
+
+.noComments p {
+  margin: 0;
+  font-size: 14px;
+}
