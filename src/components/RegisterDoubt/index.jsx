@@ -5,6 +5,7 @@ import styles from "./styles.module.css";
 import api from "@/service/api";
 import { useAuth } from "@/context/auth";
 import { useSubject } from "@/context/subject";
+import { useToast } from "@/context/toast";
 import { GetLoginToken } from "@/util/StorageLogin";
 
 export default function RegisterDoubt({
@@ -18,12 +19,7 @@ export default function RegisterDoubt({
   });
   const [loading, setLoading] = useState(false);
   const { subject, isLoaded } = useSubject();
-
-  // Função simples para substituir useCustomToast
-  const showToast = (title, message, type) => {
-    console.log(`${type.toUpperCase()}: ${title} - ${message}`);
-    alert(`${title}: ${message}`);
-  };
+  const { showSuccess, showError, showWarning } = useToast();
 
   // Função simples para verificar palavras ofensivas
   const HasBadWords = (title, description) => {
@@ -34,7 +30,7 @@ export default function RegisterDoubt({
 
   const PostQuestion = async () => {
     if (!isLoaded || !subject) {
-      showToast("Erro", "Disciplina não carregada ainda", "error");
+      showError("Erro", "Disciplina não carregada ainda");
       return;
     }
 
@@ -45,11 +41,7 @@ export default function RegisterDoubt({
       try {
         if (HasBadWords(question.titulo, question.descricao)) {
           setLoading(false);
-          showToast(
-            "Atenção",
-            "Palavras ofensivas não são permitidas!",
-            "warning"
-          );
+          showWarning("Atenção", "Palavras ofensivas não são permitidas!");
           return;
         }
 
@@ -68,20 +60,16 @@ export default function RegisterDoubt({
         );
 
         setLoading(false);
-        showToast("Sucesso", "Dúvida publicada com sucesso!", "success");
+        showSuccess("Sucesso", "Dúvida publicada com sucesso!");
         handleClose(true);
       } catch (error) {
         console.log(error);
-        showToast("Erro", "Erro ao publicar dúvida!", "error");
+        showError("Erro", "Erro ao publicar dúvida!");
         setLoading(false);
         return error.response?.data;
       }
     } else {
-      showToast(
-        "Atenção",
-        "Título e descrição obrigatórios, preencha-os!",
-        "warning"
-      );
+      showWarning("Atenção", "Título e descrição obrigatórios, preencha-os!");
       setLoading(false);
     }
   };

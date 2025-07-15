@@ -11,6 +11,7 @@ import AnswerQuestions from "@/components/AnswerQuestions";
 import api from "@/service/api";
 import { useAuth } from "@/context/auth";
 import { useSubject } from "@/context/subject";
+import { useToast } from "@/context/toast";
 import { GetLoginToken } from "@/util/StorageLogin";
 import ForumHeader from "@/components/ForumHeader"; // Importa o novo componente
 import { FaUserCircle } from "react-icons/fa"; // Mantido para o ícone de perfil, se necessário como fallback ou passado diretamente
@@ -40,12 +41,7 @@ export default function Forum() {
   const [originalData, setOriginalData] = useState([]); // Dados originais sem filtro de pesquisa
   const [loading, setLoading] = useState(true);
 
-  // Função simples para substituir useCustomToast
-  const showToast = (title, message, type) => {
-    console.log(`${type.toUpperCase()}: ${title} - ${message}`);
-    // Aqui você pode implementar uma solução de toast real depois
-    alert(`${title}: ${message}`);
-  };
+  const { showSuccess, showError, showWarning } = useToast();
 
   const { subject, isLoaded } = useSubject();
 
@@ -153,7 +149,7 @@ export default function Forum() {
   const handleReportQuestion = async () => {
     try {
       if (!reportQuestion.reason) {
-        showToast("Erro", "Selecione um motivo", "warning");
+        showWarning("Erro", "Selecione um motivo");
         return;
       }
 
@@ -171,9 +167,9 @@ export default function Forum() {
 
       setReportQuestion({ open: false, id: null });
 
-      showToast("Sucesso", "Reportado com sucesso!", "success");
+      showSuccess("Sucesso", "Reportado com sucesso!");
     } catch (error) {
-      showToast("Error", "Tente novamente mais tarde", "erro");
+      showError("Erro", "Tente novamente mais tarde");
       console.log(error.response);
     }
   };
