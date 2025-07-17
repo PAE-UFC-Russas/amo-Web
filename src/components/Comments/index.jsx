@@ -4,12 +4,12 @@ import { FaThumbsUp, FaEllipsisH } from "react-icons/fa";
 import styles from "./styles.module.css";
 
 export default function Comments({
-  author = "Gigi Arraujooo",
+  author,
   avatar,
   isVerified = true,
-  content = "Seria ideal o documento com o código pronto para rodar. Caso não possa fazer isso, escreve em uma folha de papel, bate foto e envia no SIGAA",
-  date = "17/04/2024",
-  likes = 7,
+  content,
+  date,
+  likes,
   isLiked = false,
   onLike,
   onMenuClick,

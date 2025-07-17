@@ -1,13 +1,79 @@
 "use client";
-import React, { useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { FaTimes, FaThumbsUp, FaEllipsisV, FaArrowRight } from "react-icons/fa";
 import Image from "next/image";
 import Comments from "@/components/Comments";
 import styles from "./styles.module.css";
 import perfil from "../../../assets/perfil.png";
+import api from "@/service/api";
 
 export default function AnswerQuestions({ isOpen, onClose, question = null }) {
-  const [newComment, setNewComment] = useState("");
+  const [responses, setResponses] = useState([]);
+  const [myResponse, setMyResponse] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    if (isOpen && question) {
+      GetResponses();
+    }
+  }, [isOpen, question]);
+
+  const PostResponse = async () => {
+    setLoading(true);
+    // if (HasBadWords(myResponse)) {
+    //   setLoading(false);
+    //   return;
+    // }
+
+    try {
+      await api.post("/respostas/", {
+        duvida: question.id,
+        resposta: myResponse,
+      });
+
+      GetResponses();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+    setMyResponse("");
+  };
+
+  const GetResponses = async (next = false, reset = false) => {
+    try {
+      setLoading(true);
+
+      const currentPage = next && responses.next ? page + 1 : 1;
+      const url = `/respostas/?duvida=${question.id}&page=${currentPage}`;
+
+      const response = await api.get(url);
+
+      let results = response.data.results;
+
+      if (question.resposta_correta) {
+        const correctAnswerIndex = results.findIndex(
+          (item) => item.id === question.resposta_correta
+        );
+        if (correctAnswerIndex !== -1) {
+          const [correctAnswer] = results.splice(correctAnswerIndex, 1);
+          results.unshift(correctAnswer);
+        }
+      }
+
+      setResponses({
+        ...response.data,
+        results: results,
+      });
+
+      setPage(currentPage);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
 
   if (!isOpen) return null;
 
@@ -95,16 +161,26 @@ export default function AnswerQuestions({ isOpen, onClose, question = null }) {
         </div>
         {/* Campo de Comentário */}
         <div className={styles.commentSection}>
-          <form className={styles.commentForm}>
+          <form
+            className={styles.commentForm}
+            onSubmit={(e) => e.preventDefault()}
+          >
             <div className={styles.commentInputContainer}>
               <input
                 type="text"
                 placeholder="Comentar"
                 className={styles.commentInput}
-                value={newComment}
-                onChange={(e) => setNewComment(e.target.value)}
+                value={myResponse}
+                onChange={(e) => setMyResponse(e.target.value)}
               />
-              <button type="submit" className={styles.submitCommentButton}>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  PostResponse();
+                }}
+                className={styles.submitCommentButton}
+              >
                 <FaArrowRight size={16} />
               </button>
             </div>{" "}
@@ -117,19 +193,19 @@ export default function AnswerQuestions({ isOpen, onClose, question = null }) {
 
         {/* Lista de Comentários */}
         <div className={styles.commentsSection}>
-          {question?.comentarios && question.comentarios.length > 0 ? (
-            question.comentarios.map((comment, index) => (
+          {responses?.results && responses.results.length > 0 ? (
+            responses.results.map((response, index) => (
               <Comments
-                key={comment.id || index}
-                author={comment.autor?.perfil?.nome_exibicao || "Usuário"}
-                avatar={comment.autor?.perfil?.foto || perfil}
-                isVerified={comment.autor?.verificado || false}
-                content={comment.conteudo || comment.texto || "Comentário"}
-                date={formatDate(comment.data)}
-                likes={comment.votos || 0}
-                isLiked={comment.votou || false}
-                onLike={() => console.log("Curtir comentário:", comment.id)}
-                onMenuClick={() => console.log("Menu comentário:", comment.id)}
+                key={response.id || index}
+                author={response.autor?.perfil?.nome_exibicao || "Usuário"}
+                avatar={response.autor?.perfil?.foto || perfil}
+                isVerified={response.autor?.verificado || false}
+                content={response.resposta || "Comentário"}
+                date={formatDate(response.data)}
+                likes={response.votos || 0}
+                isLiked={response.votou || false}
+                onLike={() => console.log("Curtir comentário:", response.id)}
+                onMenuClick={() => console.log("Menu comentário:", response.id)}
               />
             ))
           ) : (
