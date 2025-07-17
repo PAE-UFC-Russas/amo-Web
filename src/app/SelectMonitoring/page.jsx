@@ -52,7 +52,7 @@ export default function SelectMonitoring() {
             {!loading && subjects.length > 0 && (
               <div className={styles.subjectCount}>
                 {subjects.length} monitoria{subjects.length !== 1 ? "s" : ""}{" "}
-                disponível{subjects.length !== 1 ? "eis" : ""}
+                disponível
               </div>
             )}
           </div>

@@ -7,7 +7,6 @@ import Title from "@/components/title";
 import api from "@/service/api";
 import { useSubject } from "@/context/subject";
 
-import DefaultButton from "@/components/DefaultButton";
 import SubjectButton from "@/components/SubjectButton";
 
 export default function SelectDiscipline() {
@@ -44,7 +43,7 @@ export default function SelectDiscipline() {
             {!loading && courses.length > 0 && (
               <div className={styles.courseCount}>
                 {courses.length} curso{courses.length !== 1 ? "s" : ""}{" "}
-                disponível{courses.length !== 1 ? "eis" : ""}
+                disponível
               </div>
             )}
           </div>

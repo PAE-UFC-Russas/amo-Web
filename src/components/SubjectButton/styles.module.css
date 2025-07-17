@@ -1,5 +1,7 @@
 .subjectButton {
-  min-width: 400px;
+  width: 100%;
+  max-width: 500px;
+  min-width: 280px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -68,7 +70,8 @@
 
 @media (max-width: 1024px) {
   .subjectButton {
-    min-width: 350px;
+    max-width: 450px;
+    min-width: 250px;
     padding: 1rem 1.5rem;
     font-size: 1.1rem;
   }
@@ -76,7 +79,8 @@
 
 @media (max-width: 768px) {
   .subjectButton {
-    min-width: 300px;
+    max-width: 400px;
+    min-width: 220px;
     padding: 1rem 1.2rem;
     font-size: 1rem;
   }
