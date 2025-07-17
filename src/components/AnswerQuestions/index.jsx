@@ -8,7 +8,12 @@ import perfil from "../../../assets/perfil.png";
 import api from "@/service/api";
 
 export default function AnswerQuestions({ isOpen, onClose, question = null }) {
-  const [responses, setResponses] = useState([]);
+  const [responses, setResponses] = useState({
+    results: [],
+    count: 0,
+    next: null,
+    previous: null,
+  });
   const [myResponse, setMyResponse] = useState("");
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
@@ -42,6 +47,8 @@ export default function AnswerQuestions({ isOpen, onClose, question = null }) {
   };
 
   const GetResponses = async (next = false, reset = false) => {
+    if (!question?.id) return;
+
     try {
       setLoading(true);
 
@@ -51,6 +58,9 @@ export default function AnswerQuestions({ isOpen, onClose, question = null }) {
       const response = await api.get(url);
 
       let results = response.data.results;
+
+      // Ordenar por data mais recente primeiro
+      results.sort((a, b) => new Date(b.data) - new Date(a.data));
 
       if (question.resposta_correta) {
         const correctAnswerIndex = results.findIndex(
@@ -66,11 +76,10 @@ export default function AnswerQuestions({ isOpen, onClose, question = null }) {
         ...response.data,
         results: results,
       });
-
       setPage(currentPage);
       setLoading(false);
     } catch (error) {
-      console.log(error);
+      console.log("Erro ao buscar respostas:", error);
       setLoading(false);
     }
   };
