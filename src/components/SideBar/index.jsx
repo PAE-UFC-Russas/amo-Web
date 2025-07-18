@@ -21,10 +21,8 @@ export default function SideBar() {
   // Define os itens do menu dinamicamente baseado na disciplina selecionada
   const menuItems = [
     {
-      path: subject?.nome ? "/Forum" : "/SelectDiscipline",
-      label: subject?.nome
-        ? subject.nome.toUpperCase()
-        : "SELECIONE UMA MONITORIA",
+      label: subject?.nome ? subject.nome.toUpperCase() : "",
+      isDisplayOnly: true, // Primeiro item é apenas para visualização
     },
     { path: "/Forum", label: "FÓRUM" },
     { path: "/Agendamentos", label: "AGENDAMENTO" },
@@ -97,22 +95,37 @@ export default function SideBar() {
             />
           </div>
           <ul className={styles.menu}>
-            {menuItems.map((item, index) => (
-              <Link
-                style={{ textDecoration: "none", color: "white" }}
-                key={item.label}
-                href={item.path}
-                passHref
-              >
-                <li
-                  className={`${styles.menuItem} ${
-                    pathname === item.path ? styles.active : ""
-                  } ${index === 0 && !subject?.nome ? styles.placeholder : ""}`}
+            {menuItems.map((item, index) => {
+              // O primeiro item (monitoria) é apenas para visualização, não clicável
+              if (item.isDisplayOnly) {
+                return (
+                  <li
+                    key={item.label}
+                    className={`${styles.menuItem} ${styles.displayOnly}`}
+                  >
+                    {item.label}
+                  </li>
+                );
+              }
+
+              // Os outros itens continuam clicáveis
+              return (
+                <Link
+                  style={{ textDecoration: "none", color: "white" }}
+                  key={item.label}
+                  href={item.path}
+                  passHref
                 >
-                  {item.label}
-                </li>
-              </Link>
-            ))}
+                  <li
+                    className={`${styles.menuItem} ${
+                      pathname === item.path ? styles.active : ""
+                    }`}
+                  >
+                    {item.label}
+                  </li>
+                </Link>
+              );
+            })}
           </ul>
         </div>
 

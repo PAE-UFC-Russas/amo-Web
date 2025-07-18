@@ -2,14 +2,37 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 250px; /* Aumentado para corresponder à imagem */
-  background-color: #2481b6;
+  width: 280px;
+  background: linear-gradient(180deg, #024284 0%, #2481b6 50%, #52d6fb 100%);
   color: white;
-  height: 100vh; /* Ocupa a altura total da tela */
-  padding-top: 20px; /* Adiciona algum preenchimento no topo */
-  transition: width 0.3s ease, padding 0.3s ease; /* Adiciona transição para largura e padding */
-  position: relative; /* Para posicionar o botão de toggle */
-  overflow-x: hidden; /* Evita que o conteúdo vaze durante a transição */
+  height: 100vh;
+  padding: 20px 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow-x: hidden;
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+      circle at 30% 20%,
+      rgba(255, 255, 255, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 70% 80%,
+      rgba(255, 255, 255, 0.05) 0%,
+      transparent 50%
+    );
+  pointer-events: none;
+  z-index: 1;
 }
 
 .sidebarContent {
@@ -17,175 +40,180 @@
   flex-direction: column;
   height: 100%;
   width: 100%;
+  position: relative;
+  z-index: 2;
 }
 
 .sidebarTop {
   flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .logo {
-  margin-bottom: 30px; /* Adiciona espaço abaixo do logo */
+  margin-bottom: 40px;
+  padding: 0 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 .menu {
   list-style: none;
-  padding: 0; /* Remove o preenchimento padrão */
-  width: 100%; /* Faz o menu ocupar toda a largura da barra lateral */
+  padding: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 20px;
 }
 
 .menuItem {
-  padding: 15px 20px; /* Aumenta o preenchimento */
-  margin: 10px 0; /* Aumenta a margem */
+  padding: 16px 20px;
+  margin: 0;
   cursor: pointer;
-  font-weight: bold;
-  text-align: center; /* Centraliza o texto */
-  transition: background-color 0.3s ease; /* Adiciona transição suave */
+  font-weight: 600;
+  text-align: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.menuItem::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.menuItem:hover::before {
+  left: 100%;
 }
 
 .menuItem:hover {
-  background-color: rgba(255, 255, 255, 0.1); /* Efeito de hover sutil */
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .menuItem.active {
-  border-radius: 5px 0px 0px 5px;
-  background-color: #52d6fb; /* Cor de destaque para o item ativo */
-  color: #024284; /* Cor do texto para o item ativo */
-  font-size: 1em; /* Tamanho de fonte padrão */
-  margin-left: 20px;
+  background: linear-gradient(135deg, #52d6fb, #ffffff);
+  color: #024284;
+  font-weight: 700;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 30px rgba(82, 214, 251, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
 }
 
 .mobileMenuToggle {
-  display: none; /* Escondido por padrão */
+  display: none;
   position: absolute;
-  top: 10px;
+  top: 15px;
   left: 50%;
   transform: translateX(-50%);
   cursor: pointer;
   font-size: 24px;
   color: white;
-  z-index: 1001; /* Acima do conteúdo da sidebar, abaixo do overlay se houver */
-  /* padding: 10px; /* Adiciona um pouco de área de clique */
-  /* background-color: rgba(0,0,0,0.1); /* Opcional: para melhor visibilidade do clique */
-  /* border-radius: 50%; /* Opcional */
+  z-index: 1001;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
 }
 
-.sidebarContent {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  transition: opacity 0.3s ease, transform 0.3s ease, max-height 0.4s ease-out; /* Adiciona max-height à transição */
-  overflow: hidden; /* Garante que o conteúdo não vaze */
-  background-color: #2481b6;
-}
-
-@media (max-width: 768px) {
-  .sidebar.mobile {
-    position: fixed; /* Fixa na tela */
-    bottom: 0; /* Alinha na parte inferior */
-    left: 0;
-    width: 100%;
-    height: auto; /* Altura se ajusta ao conteúdo quando aberto */
-    max-height: 60px; /* Altura quando colapsado, mostrando apenas o toggle */
-    padding-top: 0; /* Remove padding do topo, o toggle controlará o espaço */
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Sombra para destacar da página */
-    z-index: 1000; /* Para ficar sobre outros conteúdos da página */
-    overflow: hidden; /* Para controlar a expansão com max-height */
-    transition: max-height 0.4s ease-out; /* Transição suave para abrir/fechar */
-  }
-
-  .sidebar.mobile:not(.collapsed) {
-    max-height: 70vh; /* Altura máxima quando aberto (ex: 70% da altura da viewport) */
-    overflow-y: auto; /* Permite rolagem se o conteúdo for maior */
-  }
-
-  .sidebar.mobile :global(.mobileMenuToggle) {
-    display: flex; /* Mostra o botão de toggle */
-    align-items: center;
-    justify-content: center;
-    position: sticky; /* Faz o botão ficar fixo no topo da sidebar ao rolar o conteúdo interno */
-    top: 0;
-    left: auto; /* Adicionado para resetar o 'left' da regra genérica */
-    transform: none; /* Adicionado para resetar o 'transform' da regra genérica */
-    width: 100%;
-    height: 60px; /* Altura da área do toggle */
-    background-color: #024284; /* Cor de fundo para a barra do toggle */
-    border-bottom: 1px solid #013166; /* Linha sutil abaixo do toggle */
-  }
-
-  .sidebar.mobile :global(.sidebarContent) {
-    padding: 15px; /* Adiciona padding ao conteúdo interno */
-  }
-
-  .sidebar.mobile.collapsed :global(.sidebarContent) {
-    padding: 0; /* Remove padding quando colapsado para evitar espaço extra */
-  }
-
-  /* A classe .hidden no sidebarContent ainda pode ser útil para esconder completamente */
-  .sidebar.mobile :global(.sidebarContent).hidden {
-    max-height: 0; /* Garante que não ocupe espaço */
-    opacity: 0;
-    pointer-events: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .sidebar.mobile :global(.logo) {
-    margin-top: 10px; /* Espaço acima do logo quando aberto */
-    margin-bottom: 15px;
-    display: flex; /* Adicionado para centralizar a imagem dentro do div .logo */
-    justify-content: center; /* Adicionado para centralizar a imagem dentro do div .logo */
-    width: 100%; /* Garante que o contêiner do logo ocupe a largura para centralização */
-  }
-
-  .sidebar.mobile :global(.logo) img {
-    /* Supondo que a tag da imagem seja img, ajuste se for diferente */
-    max-width: 150px; /* Exemplo de tamanho máximo para o logo em mobile */
-    height: auto; /* Mantém a proporção */
-  }
-
-  .sidebar.mobile :global(.menuItem) {
-    padding: 12px 15px;
-    font-size: 0.9em;
-  }
+.mobileMenuToggle:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateX(-50%) scale(1.1);
 }
 
 /* Estilos para o botão de logout */
 .logoutContainer {
-  margin-top: auto; /* Empurra o botão para o final da sidebar */
+  margin-top: auto;
   width: 100%;
   padding: 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.1);
 }
 
 .logoutButton {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 12px;
   width: 100%;
-  padding: 15px 20px;
-  background-color: #d32f2f;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #d32f2f, #b71c1c);
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 12px;
   cursor: pointer;
-  font-weight: bold;
-  font-size: 0.9em;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 6px 20px rgba(211, 47, 47, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.logoutButton::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.logoutButton:hover::before {
+  left: 100%;
 }
 
 .logoutButton:hover {
-  background-color: #b71c1c;
-  transform: translateY(-2px);
+  background: linear-gradient(135deg, #f44336, #d32f2f);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(211, 47, 47, 0.4);
 }
 
 .logoutButton:active {
-  transform: translateY(0);
+  transform: translateY(-1px);
 }
 
 .logoutIcon {
   font-size: 1.1em;
+  transition: transform 0.3s ease;
+}
+
+.logoutButton:hover .logoutIcon {
+  transform: rotate(-10deg);
 }
 
 .logoutText {
@@ -193,15 +221,85 @@
   letter-spacing: 0.5px;
 }
 
-/* Responsividade para mobile */
 @media (max-width: 768px) {
+  .sidebar.mobile {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    max-height: 70px;
+    padding: 0;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 20px 20px 0 0;
+  }
+
+  .sidebar.mobile:not(.collapsed) {
+    max-height: 75vh;
+    overflow-y: auto;
+  }
+
+  .sidebar.mobile .mobileMenuToggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    left: auto;
+    transform: none;
+    width: 100%;
+    height: 70px;
+    background: linear-gradient(135deg, #024284, #2481b6);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px 20px 0 0;
+  }
+
+  .sidebar.mobile .sidebarContent {
+    padding: 20px 15px 15px;
+  }
+
+  .sidebar.mobile.collapsed .sidebarContent {
+    padding: 0;
+  }
+
+  .sidebar.mobile .sidebarContent.hidden {
+    max-height: 0;
+    opacity: 0;
+    pointer-events: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .sidebar.mobile .logo {
+    margin: 15px 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .sidebar.mobile .menu {
+    padding: 0 10px;
+    gap: 6px;
+  }
+
+  .sidebar.mobile .menuItem {
+    padding: 12px 15px;
+    font-size: 0.85rem;
+    border-radius: 8px;
+  }
+
   .sidebar.mobile .logoutContainer {
-    padding: 15px;
+    padding: 15px 10px;
+    margin-top: 10px;
   }
 
   .sidebar.mobile .logoutButton {
     padding: 12px 15px;
-    font-size: 0.8em;
+    font-size: 0.8rem;
+    border-radius: 8px;
   }
 
   .sidebar.mobile .logoutIcon {
@@ -209,16 +307,31 @@
   }
 }
 
-/* Estilo para placeholder quando nenhuma disciplina está selecionada */
-.placeholder {
-  opacity: 0.7;
-  font-style: italic;
-  background-color: rgba(255, 255, 255, 0.05) !important;
-  color: rgba(255, 255, 255, 0.8) !important;
-  border: 1px dashed rgba(255, 255, 255, 0.3);
+/* Estilo para item apenas de visualização (monitoria selecionada) */
+.displayOnly {
+  cursor: default !important;
+  background: linear-gradient(
+    135deg,
+    rgba(82, 214, 251, 0.15),
+    rgba(255, 255, 255, 0.1)
+  ) !important;
+  border: 2px solid rgba(82, 214, 251, 0.3) !important;
+  color: #52d6fb !important;
+  font-weight: 700 !important;
+  position: relative;
 }
 
-.placeholder:hover {
-  background-color: rgba(255, 255, 255, 0.1) !important;
-  opacity: 1;
+.displayOnly::before {
+  display: none !important;
+}
+
+.displayOnly:hover {
+  transform: none !important;
+  background: linear-gradient(
+    135deg,
+    rgba(82, 214, 251, 0.15),
+    rgba(255, 255, 255, 0.1)
+  ) !important;
+  box-shadow: none !important;
+  border-color: rgba(82, 214, 251, 0.3) !important;
 }
