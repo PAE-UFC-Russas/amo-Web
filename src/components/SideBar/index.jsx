@@ -5,16 +5,10 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { FaChevronDown, FaChevronUp, FaSignOutAlt } from "react-icons/fa";
 import { useAuth } from "@/context/auth";
+import { useSubject } from "@/context/subject";
 import styles from "./styles.module.css";
 
 import Logo from "../../../assets/logoSadebar.png";
-
-const menuItems = [
-  { path: "#", label: "ÉTICA PROFISSIONAL" },
-  { path: "/Forum", label: "FÓRUM" },
-  { path: "/Agendamentos", label: "AGENDAMENTO" },
-  { path: "/Schedules", label: "HORÁRIOS" },
-];
 
 export default function SideBar() {
   const [isOpen, setIsOpen] = useState(false); // Controla se o menu mobile está aberto ou fechado
@@ -22,6 +16,20 @@ export default function SideBar() {
   const pathname = usePathname();
   const router = useRouter();
   const { Logout } = useAuth();
+  const { subject } = useSubject();
+
+  // Define os itens do menu dinamicamente baseado na disciplina selecionada
+  const menuItems = [
+    {
+      path: subject?.nome ? "/Forum" : "/SelectDiscipline",
+      label: subject?.nome
+        ? subject.nome.toUpperCase()
+        : "SELECIONE UMA MONITORIA",
+    },
+    { path: "/Forum", label: "FÓRUM" },
+    { path: "/Agendamentos", label: "AGENDAMENTO" },
+    { path: "/Schedules", label: "HORÁRIOS" },
+  ];
 
   // Função para fazer logout
   const handleLogout = async () => {
@@ -89,7 +97,7 @@ export default function SideBar() {
             />
           </div>
           <ul className={styles.menu}>
-            {menuItems.map((item) => (
+            {menuItems.map((item, index) => (
               <Link
                 style={{ textDecoration: "none", color: "white" }}
                 key={item.label}
@@ -99,7 +107,7 @@ export default function SideBar() {
                 <li
                   className={`${styles.menuItem} ${
                     pathname === item.path ? styles.active : ""
-                  }`}
+                  } ${index === 0 && !subject?.nome ? styles.placeholder : ""}`}
                 >
                   {item.label}
                 </li>
