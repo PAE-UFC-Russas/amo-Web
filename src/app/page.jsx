@@ -25,6 +25,12 @@ export default function Home() {
     password: "",
   });
 
+  // Estados para controlar erros individuais nos inputs
+  const [inputErrors, setInputErrors] = useState({
+    email: false,
+    password: false,
+  });
+
   // Verificar se o usuário já está logado
   useEffect(() => {
     const checkUserAuth = async () => {
@@ -81,19 +87,39 @@ export default function Home() {
       ...prev,
       [field]: value,
     }));
+
     // Limpa o erro quando o usuário começa a digitar
     if (error) setError("");
+
+    // Limpa o erro visual do input específico
+    setInputErrors((prev) => ({
+      ...prev,
+      [field]: false,
+    }));
   };
 
   const login = async () => {
     // Validação básica
     if (!userLogin.email || !userLogin.password) {
       setError("Por favor, preencha todos os campos");
+
+      // Marca os campos vazios como erro
+      setInputErrors({
+        email: !userLogin.email,
+        password: !userLogin.password,
+      });
+
       return;
     }
 
     setLoading(true);
     setError("");
+
+    // Limpa os erros visuais dos inputs ao tentar fazer login novamente
+    setInputErrors({
+      email: false,
+      password: false,
+    });
 
     try {
       console.log("🔐 Iniciando login...");
@@ -108,6 +134,19 @@ export default function Home() {
       if (result?.erro) {
         setError(result.erro);
         console.error("Erro no login:", result.erro);
+
+        // Se for erro de dados inválidos (400) ou credenciais incorretas (401), marca os inputs como erro
+        if (
+          result.erro === "Dados inválidos. Verifique o email e senha." ||
+          result.erro ===
+            "Email ou senha incorretos. Verifique suas credenciais e tente novamente."
+        ) {
+          setInputErrors({
+            email: true,
+            password: true,
+          });
+        }
+
         return; // Para aqui se houver erro
       }
 
@@ -161,12 +200,14 @@ export default function Home() {
             value={userLogin.email}
             onChange={(value) => handleInputChange("email", value)}
             type="email"
+            error={inputErrors.email}
           />
           <Input
             placeholder="SENHA"
             value={userLogin.password}
             onChange={(value) => handleInputChange("password", value)}
             type="password"
+            error={inputErrors.password}
           />
           {error && (
             <div style={{ color: "red", fontSize: "14px", margin: "10px 0" }}>
